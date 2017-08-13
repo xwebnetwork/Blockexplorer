@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer", "Blockexplorer\Blockexplorer.csproj", "{A71CB76B-D76F-4247-BF53-CA76374C2074}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.Core", "Blockexplorer.Core\Blockexplorer.Core.csproj", "{4972F687-EADA-467F-B4D9-BB906CFBF1D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.Services", "Blockexplorer.Services\Blockexplorer.Services.csproj", "{D2738E8F-B9EA-4458-9278-3A4646188625}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.BlockProvider", "Blockexplorer.BlockProvider\Blockexplorer.BlockProvider.csproj", "{CD6440E9-7CBF-41BF-B384-E20613499384}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.BlockProvider.Rpc", "Blockexplorer.BlockProvider.Rpc\Blockexplorer.BlockProvider.Rpc.csproj", "{AC8B5916-7B5F-4A15-92C1-0D556940419A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A71CB76B-D76F-4247-BF53-CA76374C2074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A71CB76B-D76F-4247-BF53-CA76374C2074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A71CB76B-D76F-4247-BF53-CA76374C2074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A71CB76B-D76F-4247-BF53-CA76374C2074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4972F687-EADA-467F-B4D9-BB906CFBF1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4972F687-EADA-467F-B4D9-BB906CFBF1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4972F687-EADA-467F-B4D9-BB906CFBF1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4972F687-EADA-467F-B4D9-BB906CFBF1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2738E8F-B9EA-4458-9278-3A4646188625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2738E8F-B9EA-4458-9278-3A4646188625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2738E8F-B9EA-4458-9278-3A4646188625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2738E8F-B9EA-4458-9278-3A4646188625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD6440E9-7CBF-41BF-B384-E20613499384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6440E9-7CBF-41BF-B384-E20613499384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6440E9-7CBF-41BF-B384-E20613499384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6440E9-7CBF-41BF-B384-E20613499384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8B5916-7B5F-4A15-92C1-0D556940419A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8B5916-7B5F-4A15-92C1-0D556940419A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8B5916-7B5F-4A15-92C1-0D556940419A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8B5916-7B5F-4A15-92C1-0D556940419A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

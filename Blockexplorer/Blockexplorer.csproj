@@ -1,0 +1,145 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\aspnettemplate\css\site.css" />
+    <Content Include="wwwroot\aspnettemplate\css\site.min.css" />
+    <Content Include="wwwroot\aspnettemplate\images\banner1.svg" />
+    <Content Include="wwwroot\aspnettemplate\images\banner2.svg" />
+    <Content Include="wwwroot\aspnettemplate\images\banner3.svg" />
+    <Content Include="wwwroot\aspnettemplate\images\banner4.svg" />
+    <Content Include="wwwroot\aspnettemplate\js\site.js" />
+    <Content Include="wwwroot\aspnettemplate\js\site.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\.bower.json" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\dist\js\npm.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\bootstrap\LICENSE" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation-unobtrusive\.bower.json" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\.bower.json" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery-validation\LICENSE.md" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery\.bower.json" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery\dist\jquery.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery\dist\jquery.min.js" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery\dist\jquery.min.map" />
+    <Content Include="wwwroot\aspnettemplate\lib\jquery\LICENSE.txt" />
+    <Content Include="wwwroot\images\favicon.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\bootstrap\.bower.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\.bower.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\jquery-validation\.bower.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\jquery\.bower.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\font-awesome.min.css" />
+    <None Include="wwwroot\css\media.css" />
+    <None Include="wwwroot\css\site.css" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\fonts\ProximaNova-Regular.eot" />
+    <None Include="wwwroot\fonts\ProximaNova-Regular.otf" />
+    <None Include="wwwroot\fonts\ProximaNova-Regular.svg" />
+    <None Include="wwwroot\fonts\ProximaNova-Regular.ttf" />
+    <None Include="wwwroot\fonts\ProximaNova-Regular.woff" />
+    <None Include="wwwroot\fonts\ProximaNova-Semibold.eot" />
+    <None Include="wwwroot\fonts\ProximaNova-Semibold.otf" />
+    <None Include="wwwroot\fonts\ProximaNova-Semibold.svg" />
+    <None Include="wwwroot\fonts\ProximaNova-Semibold.ttf" />
+    <None Include="wwwroot\fonts\ProximaNova-Semibold.woff" />
+    <None Include="wwwroot\images\404.png" />
+    <None Include="wwwroot\images\arrow.png" />
+    <None Include="wwwroot\images\btn.png" />
+    <None Include="wwwroot\images\btn_2.png" />
+    <None Include="wwwroot\images\fb.png" />
+    <None Include="wwwroot\images\line.png" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\images\placeholder.png" />
+    <None Include="wwwroot\images\processing-menu.gif" />
+    <None Include="wwwroot\images\search-btn.png" />
+    <None Include="wwwroot\images\tw.png" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\lib\jquery\MIT-LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blockexplorer.BlockProvider.Rpc\Blockexplorer.BlockProvider.Rpc.csproj" />
+    <ProjectReference Include="..\Blockexplorer.BlockProvider\Blockexplorer.BlockProvider.csproj" />
+    <ProjectReference Include="..\Blockexplorer.Core\Blockexplorer.Core.csproj" />
+    <ProjectReference Include="..\Blockexplorer.Services\Blockexplorer.Services.csproj" />
+  </ItemGroup>
+
+</Project>
