@@ -38,13 +38,13 @@ namespace Blockexplorer.BlockProvider.Rpc
 				TransactionsOut = new List<Out>(),
 			};
 
-			Debug.Assert(id== transaction.TransactionId);
+			Debug.Assert(id == transaction.TransactionId);
 
 			int index = 0;
-			foreach (var rpcIn  in tx.Vin)
+			foreach (var rpcIn in tx.Vin)
 			{
-				var inp = new In {Index = index};
-				
+				var inp = new In { Index = index };
+
 				if (rpcIn.Coinbase == null)
 				{
 					string hexScript = rpcIn.ScriptSig.Hex;
@@ -81,7 +81,8 @@ namespace Blockexplorer.BlockProvider.Rpc
 			index = 0;
 			foreach (var output in tx.Vout)
 			{
-				var @out = new Out {
+				var @out = new Out
+				{
 					TransactionId = transaction.TransactionId,
 					Value = output.Value,
 					Quantity = output.N,
@@ -93,17 +94,26 @@ namespace Blockexplorer.BlockProvider.Rpc
 				else
 				{
 					string hexScript = output.ScriptPubKey.Hex;
-					byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
-					Script script = new Script(decodedScript);
-					var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
-					BitcoinPubKeyAddress address = pubKey.GetAddress(Network.RegTest);
-					@out.Address = address.ToString();
+
+					if (!string.IsNullOrEmpty(hexScript))
+					{
+						byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
+						Script script = new Script(decodedScript);
+						var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
+						BitcoinPubKeyAddress address = pubKey.GetAddress(Network.RegTest);
+						@out.Address = address.ToString();
+					}
+					else
+					{
+						@out.Address = "none";
+					}
+
 				}
 
 				transaction.TransactionsOut.Add(@out);
 			}
 
-			
+
 
 			return transaction;
 		}
