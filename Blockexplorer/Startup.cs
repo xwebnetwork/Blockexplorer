@@ -74,15 +74,17 @@ namespace Blockexplorer
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				app.UseBrowserLink();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-			}
+			app.UseExceptionHandler("/Home/Error");
+
+			//if (env.IsDevelopment())
+			//{
+			//	app.UseDeveloperExceptionPage();
+			//	app.UseBrowserLink();
+			//}
+			//else
+			//{
+			//	app.UseExceptionHandler("/Home/Error");
+			//}
 		}
 	}
 }

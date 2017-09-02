@@ -4,7 +4,7 @@ using Blockexplorer.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blockexplorer.Controllers
-{
+{	
     public class SearchController : Controller
     {
 	    readonly ISearchService _searchService;
