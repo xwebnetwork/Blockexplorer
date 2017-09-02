@@ -65,6 +65,15 @@ namespace Blockexplorer
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
+			app.UseStaticFiles();
+
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}");
+			});
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -74,15 +83,6 @@ namespace Blockexplorer
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
-
-			app.UseStaticFiles();
-
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
-			});
 		}
 	}
 }

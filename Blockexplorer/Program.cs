@@ -15,6 +15,7 @@ namespace Blockexplorer
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 //.UseApplicationInsights()
+				
                 .Build();
 
             host.Run();
