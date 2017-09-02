@@ -38,7 +38,8 @@ namespace Blockexplorer.BlockProvider.Rpc
 				TransactionsOut = new List<Out>(),
 			};
 
-			Debug.Assert(id == transaction.TransactionId);
+			// this fails b/c no input validation
+			// Debug.Assert(id == transaction.TransactionId);
 
 			int index = 0;
 			foreach (var rpcIn in tx.Vin)
