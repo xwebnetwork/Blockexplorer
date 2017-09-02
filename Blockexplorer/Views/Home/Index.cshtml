@@ -26,11 +26,11 @@
                         <p>
                             @if (@Model.LastBlock != null)
                             {
-                                <small>Last block: <a href="@Url.Action("Index", "Block", new {id = Model.LastBlock.Hash})">@Model.LastBlock.Height</a> - Testnet</small>
+                                <small>Last block: <a href="@Url.Action("Index", "Block", new {id = Model.LastBlock.Hash})">@Model.LastBlock.Height</a> - Mainnet</small>
                             }
                             else
                             {
-                                <small>The Blockexplorer node seems to be offline - Testnet</small>
+                                <small>The Blockexplorer node seems to be offline - Mainnet</small>
                             }
                         </p>
                     </div>
