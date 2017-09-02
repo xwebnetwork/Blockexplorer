@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Blockexplorer.Core.Enums;
 using Blockexplorer.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +18,27 @@ namespace Blockexplorer.Controllers
 	    [Route("search")]
 	    public async Task<ActionResult> Index(string id)
 	    {
-		    var res = await _searchService.SearchEntityById(id);
-
-		    switch (res)
+		    try
 		    {
-			    case EntitySearchResult.Block:
-				    return RedirectToAction("Index", "Block", new { id = id });
-			    case EntitySearchResult.Transaction:
-				    return RedirectToAction("Index", "Transaction", new { id = id });
-			    case EntitySearchResult.Address:
-				    return RedirectToAction("Index", "Address", new { id = id });
-		    }
+			    var res = await _searchService.SearchEntityById(id);
 
-		    return View("_NotFound");
+			    switch (res)
+			    {
+				    case EntitySearchResult.Block:
+					    return RedirectToAction("Index", "Block", new {id = id});
+				    case EntitySearchResult.Transaction:
+					    return RedirectToAction("Index", "Transaction", new {id = id});
+				    case EntitySearchResult.Address:
+					    return RedirectToAction("Index", "Address", new {id = id});
+			    }
+
+			    return View("_NotFound");
+		    }
+		    catch (Exception e)
+		    {
+				return View("_NotFound");
+			}
+		   
 	    }
 	}
 }

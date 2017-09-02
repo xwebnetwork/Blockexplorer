@@ -80,7 +80,7 @@ namespace Blockexplorer.BlockProvider.Rpc
 
 			if (transaction.TransactionIn[0].Coinbase != null)
 			{
-				Debug.Assert(transaction.TransactionIn.Count == 1);
+				//Debug.Assert(transaction.TransactionIn.Count == 1);
 				transaction.IsCoinBase = true;
 			}
 

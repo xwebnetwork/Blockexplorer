@@ -23,40 +23,48 @@ namespace Blockexplorer.Controllers
 	    [Route("block/{id}")]
 	    public async Task<ActionResult> Index(string id, int page = 0)
 	    {
-		    if (String.IsNullOrEmpty(id))
+		    try
 		    {
-			    return RedirectToAction("Index", "Home");
+			    if (String.IsNullOrEmpty(id))
+			    {
+				    return RedirectToAction("Index", "Home");
+			    }
+
+			    var block = await BlockService.GetBlock(id);
+
+			    if (block == null)
+			    {
+				    return View("_NotFound");
+			    }
+
+			    var start = ItemsOnPage * page;
+
+			    int max;
+			    if (start < block.TotalTransactions && start + ItemsOnPage < block.TotalTransactions)
+			    {
+				    max = start + ItemsOnPage;
+			    }
+			    else
+			    {
+				    max = block.TotalTransactions;
+			    }
+
+			    var vm = new BlockModel
+			    {
+				    Block = block,
+				    Count = (int) Math.Ceiling((decimal) block.TotalTransactions / ItemsOnPage),
+				    CurrentPage = page,
+				    Start = start,
+				    Max = max
+			    };
+
+			    return View(vm);
 		    }
-
-		    var block = await BlockService.GetBlock(id);
-
-		    if (block == null)
+		    catch (Exception e)
 		    {
-			    return View("_NotFound");
-		    }
-
-		    var start = ItemsOnPage * page;
-
-		    int max;
-		    if (start < block.TotalTransactions && start + ItemsOnPage < block.TotalTransactions)
-		    {
-			    max = start + ItemsOnPage;
-		    }
-		    else
-		    {
-			    max = block.TotalTransactions;
-		    }
-
-		    var vm = new BlockModel
-		    {
-			    Block = block,
-			    Count = (int)Math.Ceiling((decimal)block.TotalTransactions / ItemsOnPage),
-			    CurrentPage = page,
-			    Start = start,
-			    Max = max
-		    };
-
-		    return View(vm);
+				return View("_NotFound");
+			}
+		 
 	    }
 	}
 }

@@ -18,19 +18,27 @@ namespace Blockexplorer.Controllers
 	    [Route("transaction/{id}")]
 	    public async Task<ActionResult> Index(string id)
 	    {
-		    if (String.IsNullOrEmpty(id))
+		    try
 		    {
-			    return RedirectToAction("Index", "Home");
+			    if (String.IsNullOrEmpty(id))
+			    {
+				    return RedirectToAction("Index", "Home");
+			    }
+
+			    var vm = await getTransactionVm(id);
+
+			    if (vm.Transaction == null)
+			    {
+				    return View("_NotFound");
+			    }
+
+			    return View(vm);
 		    }
-
-		    var vm = await getTransactionVm(id);
-
-		    if (vm.Transaction == null)
+		    catch (Exception e)
 		    {
-			    return View("_NotFound");
-		    }
-
-		    return View(vm);
+				return View("_NotFound");
+			}
+		  
 	    }
 
 	    public async Task<ActionResult> PartialTransactionDetails(string id)

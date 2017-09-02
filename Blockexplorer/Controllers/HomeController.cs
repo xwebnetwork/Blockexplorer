@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Blockexplorer.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Blockexplorer.Models;
@@ -16,28 +17,24 @@ namespace Blockexplorer.Controllers
 
 		public async Task<IActionResult> Index()
         {
-	        var lastBlock = await BlockService.GetLastBlock();
-
-	        var vm = new IndexModel
+	        try
 	        {
-		        LastBlock = lastBlock,
-	        };
-			return View(vm);
+		        var lastBlock = await BlockService.GetLastBlock();
+
+		        var vm = new IndexModel
+		        {
+			        LastBlock = lastBlock,
+		        };
+		        return View(vm);
+	        }
+	        catch (Exception e)
+	        {
+				return View("_NotFound");
+			}
+	      
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+      
 
         public IActionResult Error()
         {
