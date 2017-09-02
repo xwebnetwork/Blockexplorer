@@ -54,10 +54,15 @@ namespace Blockexplorer.BlockProvider.Rpc
 
 
 					PayToPubkeyHashScriptSigParameters param = template.ExtractScriptSigParameters(script);
-					PubKey pubKey = param.PublicKey;
-					BitcoinPubKeyAddress address = pubKey.GetAddress(Network.RegTest);
+					if (param != null)
+					{
+						PubKey pubKey = param.PublicKey;
+						BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
 
-					inp.Address = address.ToString();
+						inp.Address = address.ToString();
+					}
+					else inp.Address = "none";
+
 					inp.TransactionId = rpcIn.Txid;
 					inp.VOut = (int)rpcIn.Vout;
 					inp.Sequence = rpcIn.Sequence;
@@ -100,7 +105,7 @@ namespace Blockexplorer.BlockProvider.Rpc
 						byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
 						Script script = new Script(decodedScript);
 						var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
-						BitcoinPubKeyAddress address = pubKey.GetAddress(Network.RegTest);
+						BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
 						@out.Address = address.ToString();
 					}
 					else

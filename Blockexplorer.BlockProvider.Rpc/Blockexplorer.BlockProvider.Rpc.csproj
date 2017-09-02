@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
-    <PackageReference Include="NBitcoin" Version="4.0.0.29" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blockexplorer.Core\Blockexplorer.Core.csproj" />
+    <ProjectReference Include="..\NStratis\NBitcoin\NBitcoin.csproj" />
   </ItemGroup>
 
 </Project>

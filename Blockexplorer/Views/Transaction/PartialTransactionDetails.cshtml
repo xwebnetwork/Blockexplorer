@@ -47,7 +47,7 @@
                                 }
                                 else 
                                 {
-                                    <a href="@Url.Action("Index", "Address", new { id = input.Address })">@input.Address</a>
+                                    <a onclick="return false;" href="@Url.Action("Index", "Address", new { id = input.Address })">@input.Address</a>
                                     <br/>
                                     <a href="@Url.Action("Index", "Transaction", new { id = input.TransactionId })">@input.TransactionId</a>
 }
@@ -77,7 +77,7 @@
                                 }
                                 else
                                 { 
-                                    <a href="@Url.Action("Index", "Address", new { id = output.Address })">@output.Address</a>
+                                    <a onclick="return false;" href="@Url.Action("Index", "Address", new { id = output.Address })">@output.Address</a>
                                 }
                             </div>
                         </div>
