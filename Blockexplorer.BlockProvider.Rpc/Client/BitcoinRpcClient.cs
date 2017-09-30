@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Blockexplorer.Core.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -133,6 +134,13 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			var block = await GetBlockAsync(tx.Blockhash);
 
 			return RpcTransaction.Create(tx, block.Height);
+		}
+
+		public async Task<GetInfoRpcModel> GetInfo()
+		{
+			var json = await InvokeMethod("getinfo");
+			var result = JsonConvert.DeserializeObject<TransportRpcModel<GetInfoRpcModel>>(json);
+			return result.Result;
 		}
 	}
 
