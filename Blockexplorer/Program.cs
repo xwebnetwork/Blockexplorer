@@ -18,11 +18,12 @@ namespace Blockexplorer
 						{
 							try
 							{
+								listenOptions.NoDelay = true;
 								listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", args[0]); // hk
 							}
 							catch (Exception) { }
 						});
-					//options.Listen(IPAddress.Any,80);
+					options.Listen(IPAddress.Any,80);
 				})
 				//.UseUrls("http://*:80")
 				.UseContentRoot(Directory.GetCurrentDirectory())
