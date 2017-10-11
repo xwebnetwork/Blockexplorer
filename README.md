@@ -42,7 +42,9 @@ dotnet run
 ```
 
 Obsidian Slack Developer Contacts:
+
 @blackstone (github: netsfx)
+
 @jacobz
 
 
