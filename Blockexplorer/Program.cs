@@ -25,7 +25,7 @@ namespace Blockexplorer
 						});
 					options.Listen(IPAddress.Any,80);
 				})
-				//.UseUrls("http://*:80")
+				.UseUrls("http://*:80", "https://*:443")
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				//.UseIISIntegration()
 				.UseStartup<Startup>()
