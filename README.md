@@ -34,6 +34,7 @@ To run:
 
 ```
 git clone https://github.com/netsfx/Blockexplorer.git  
+git submodule update --init --recursive
 cd Blockexplorer/Blockexplorer
 
 dotnet restore
@@ -41,11 +42,13 @@ dotnet run
 
 ```
 
+
 Obsidian Slack Developer Contacts:
 
 @blackstone (github: netsfx)
 
 @jacobz
+
 
 
 
