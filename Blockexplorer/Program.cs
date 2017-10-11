@@ -13,8 +13,8 @@ namespace Blockexplorer
 			var host = new WebHostBuilder()
 				.UseKestrel(options =>
 				{
-					options.Listen(IPAddress.Loopback, 80);
-					options.Listen(IPAddress.Loopback, 443,
+					options.Listen(IPAddress.Any, 80);
+					options.Listen(IPAddress.Any, 443,
 				   listenOptions =>
 						{
 							try
