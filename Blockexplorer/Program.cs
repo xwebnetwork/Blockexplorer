@@ -13,7 +13,8 @@ namespace Blockexplorer
 			var host = new WebHostBuilder()
 				.UseKestrel(options =>
 				{
-					options.Listen(IPAddress.Any, 443,
+					options.Listen(IPAddress.Loopback, 80);
+					options.Listen(IPAddress.Loopback, 443,
 				   listenOptions =>
 						{
 							try
@@ -23,9 +24,9 @@ namespace Blockexplorer
 							}
 							catch (Exception) { }
 						});
-					options.Listen(IPAddress.Any,80);
+
 				})
-				.UseUrls("http://*:80", "https://*:443")
+				//.UseUrls("http://*:80", "https://*:443")
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				//.UseIISIntegration()
 				.UseStartup<Startup>()
