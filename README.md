@@ -16,7 +16,8 @@ Configure the RPC provider in appsettings.json. The default connection for devel
     "Url": "http://me:123@127.0.0.1:8332/",
     "User": "me",
     "Password": "123" 
-  } ```
+  } 
+ ```
 
 Then, configure your locally running Obsidian-Qt to match the appsettings.json. In obsdian.conf set:
 
