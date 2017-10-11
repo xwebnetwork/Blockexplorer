@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal;
 
 namespace Blockexplorer
 {
@@ -13,6 +14,7 @@ namespace Blockexplorer
 			var host = new WebHostBuilder()
 				.UseKestrel(options =>
 				{
+					options.ApplicationSchedulingMode = SchedulingMode.Inline;
 					options.Listen(IPAddress.Any, 80);
 					options.Listen(IPAddress.Any, 443,
 				   listenOptions =>
@@ -21,10 +23,11 @@ namespace Blockexplorer
 							{
 								listenOptions.NoDelay = true;
 								listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", args[0]); // hk
+								listenOptions.UseConnectionLogging();
 							}
 							catch (Exception) { }
 						});
-
+					options.UseSystemd();
 				})
 				//.UseUrls("http://*:80", "https://*:443")
 				.UseContentRoot(Directory.GetCurrentDirectory())
