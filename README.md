@@ -11,7 +11,8 @@ Running Blockexplorer
 
 Configure the RPC provider in appsettings.json. The default connection for development is:
 
-```"RpcSettings": {
+```
+"RpcSettings": {
     "Url": "http://me:123@127.0.0.1:8332/",
     "User": "me",
     "Password": "123" 
