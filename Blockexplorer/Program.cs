@@ -22,11 +22,11 @@ namespace Blockexplorer
 							}
 							catch (Exception) { }
 						});
-					options.Listen(IPAddress.Any,80);
+					//options.Listen(IPAddress.Any,80);
 				})
-				.UseUrls("http://*:80")
+				//.UseUrls("http://*:80")
 				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseIISIntegration()
+				//.UseIISIntegration()
 				.UseStartup<Startup>()
 				//.UseApplicationInsights()
 
