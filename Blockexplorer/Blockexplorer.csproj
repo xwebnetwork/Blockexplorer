@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -79,6 +80,11 @@
     <ProjectReference Include="..\Blockexplorer.BlockProvider\Blockexplorer.BlockProvider.csproj" />
     <ProjectReference Include="..\Blockexplorer.Core\Blockexplorer.Core.csproj" />
     <ProjectReference Include="..\Blockexplorer.Services\Blockexplorer.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="wildcard_obsidianplatform_com.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
