@@ -32,9 +32,13 @@ namespace Blockexplorer.Core.Domain
 	    {
 		    get
 		    {
-			    if (IsCoinBase)
-				    return 0;
-			    return TransactionIn.Sum(x => x.Value) - TransactionsOut.Sum(x=>x.Value);
+                if (IsCoinBase)
+                    return TransactionsOut.Sum(x => x.Value);
+
+                if (Block.IsProofOfStake)
+                    return TransactionsOut.Sum(x => x.Value) - TransactionIn.Sum(x => x.Value);
+
+                return TransactionIn.Sum(x => x.Value) - TransactionsOut.Sum(x=>x.Value);
 		    }
 	    }
     }

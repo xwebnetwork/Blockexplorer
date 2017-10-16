@@ -70,6 +70,7 @@ namespace Blockexplorer.BlockProvider.Rpc
 			        Confirmations = b.Confirmations,
 			        TotalTransactions = b.Tx.Length,
 			        Transactions = new List<Transaction>(b.Tx.Length),
+                    IsProofOfStake = b.Flags.Contains("proof-of-stake"),
 					Chainwork = b.Chainwork,
 					Bits = b.Bits,
 					Size = (int)b.Size,

@@ -133,9 +133,15 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 	    [JsonProperty("nextblockhash")]
 	    public string NextBlockHash { get; set; }
 
-		//DateTime Time => GetTime();
+        /// <summary>
+	    /// The flag on the block
+	    /// </summary>
+	    [JsonProperty("flags")]
+        public string Flags { get; set; }
 
-		public DateTime GetTime()
+        //DateTime Time => GetTime();
+
+        public DateTime GetTime()
         {
             return Time.FromUnixDateTime();
         }
