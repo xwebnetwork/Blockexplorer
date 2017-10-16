@@ -16,7 +16,7 @@
                         <div class="search-header">
                             <form method="get" action="@Url.Action("Index", "Search")" class="form-inline">
                                 <div class="input-group search">
-                                    <input type="text" class="form-control input-sm search-top" placeholder="Search" name="id">
+                                    <input type="text" class="form-control input-sm search-top" placeholder="Search" name="id" minlength="1" required="required">
                                     <span class="input-group-btn">
                                         <button class="btn btn-s-top" type="submit"></button>
                                     </span>
