@@ -6,5 +6,6 @@ namespace Blockexplorer.Core.Interfaces.Services
     public interface IApiService
     {
 	    Task<Info> GetInfo();
+	    Task<StakingInfo> GetStakingInfo();
     }
 }

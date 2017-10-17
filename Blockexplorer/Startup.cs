@@ -59,6 +59,7 @@ namespace Blockexplorer
 			services.AddTransient<ISearchService, SearchService>();
 			services.AddTransient<IApiService, ApiService>();
 			services.AddTransient<IInfoAdapter, InfoAdapter>();
+			services.AddTransient<IStakingInfoAdapter, StakingInfoAdapter>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
