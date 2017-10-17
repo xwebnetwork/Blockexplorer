@@ -32,6 +32,22 @@ namespace Blockexplorer.Controllers
         }
 
         // [HttpGet]
+        public async Task<ActionResult> GetStakingInfo()
+        {
+            try
+            {
+                var info = await _apiService.GetStakingInfo();
+                if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                return Json(new { info = info });
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        // [HttpGet]
         public async Task<ActionResult> MoneySupplyJson()
         {
             try

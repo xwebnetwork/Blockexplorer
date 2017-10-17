@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Threading.Tasks;
 using Blockexplorer.BlockProvider.Rpc.Client;
 using Blockexplorer.Core.Domain;
@@ -18,16 +20,16 @@ namespace Blockexplorer.BlockProvider.Rpc
         public async Task<StakingInfo> GetStakingInfo()
         {
             var rpcStakingInfo = await _client.GetStakingInfo();
-            var stakingInfo = new StakingInfo()
+            var stakingInfo = new StakingInfo
             {
-                CurrentBlockSize = rpcStakingInfo.CurrentBlockSize,
-                                 CurrentBlockTx = rpcStakingInfo.CurrentBlockTx,
-                                 PooledTx = rpcStakingInfo.PooledTx,
-                                 Difficulty = rpcStakingInfo.Difficulty,
-                                 SearchInterval = rpcStakingInfo.SearchInterval,
-                                 Weight = rpcStakingInfo.Weight,
-                                 NetStakeWeight = rpcStakingInfo.NetStakeWeight,
-                                 ExpectedTime = rpcStakingInfo.ExpectedTime
+                  CurrentBlockSize = rpcStakingInfo.CurrentBlockSize,
+                  CurrentBlockTx = rpcStakingInfo.CurrentBlockTx,
+                  PooledTx = rpcStakingInfo.PooledTx,
+                  Difficulty = rpcStakingInfo.Difficulty,
+                  SearchInterval = rpcStakingInfo.SearchInterval,
+                  Weight = rpcStakingInfo.Weight,
+                  NetStakeWeight = rpcStakingInfo.NetStakeWeight,
+                  ExpectedTime = rpcStakingInfo.ExpectedTime
             };
 
             return stakingInfo;

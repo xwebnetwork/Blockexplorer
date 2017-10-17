@@ -4,28 +4,28 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 {
     public class GetStakingInfoRpcModel
     {
-        [JsonProperty("currentblocksize")]
+            [JsonProperty("currentblocksize")]
             public int CurrentBlockSize { get; set; }
 
-        [JsonProperty("currentblocktx")]
+            [JsonProperty("currentblocktx")]
             public int CurrentBlockTx { get; set; }
 
-        [JsonProperty("pooledtx")]
+            [JsonProperty("pooledtx")]
             public int PooledTx { get; set; }
 
-        [JsonProperty("difficulty")]
+            [JsonProperty("difficulty")]
             public decimal Difficulty { get; set; }
 
-        [JsonProperty("search-interval")]
+            [JsonProperty("search-interval")]
             public int SearchInterval { get; set; }
 
-        [JsonProperty("weight")]
+            [JsonProperty("weight")]
             public int Weight { get; set; }
 
-        [JsonProperty("netstakeweight")]
+            [JsonProperty("netstakeweight")]
             public int NetStakeWeight { get; set; }
 
-        [JsonProperty("expectedtime")]
+            [JsonProperty("expectedtime")]
             public int ExpectedTime { get; set; }
     }
 }

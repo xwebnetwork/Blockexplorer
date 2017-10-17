@@ -21,7 +21,6 @@ namespace Blockexplorer.BlockProvider.Rpc
 			var info = new Info
 			{
 			  Version = rpcInfo.Version,
-			  Blocks = rpcInfo.Blocks,
 			  Connections = rpcInfo.Connections,
 			  Errors = rpcInfo.Errors,
 			  MoneySupply = rpcInfo.MoneySupply

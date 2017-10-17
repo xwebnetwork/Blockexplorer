@@ -15,12 +15,12 @@ namespace Blockexplorer.BlockProvider
 	    readonly ILogger _log;
 
         public ChainProvider(ITransactionProvider transactionProvider,
-                                  IBlockProvider blockProvider,
-                                  IAddressProvider addressProvider,
-                                  IInfoAdapter infoAdapter,
-                                  IStakingInfoAdapter stakingInfoAdapter,
-                                  ILoggerFactory loggerFactory)
-        {
+              IBlockProvider blockProvider,
+              IAddressProvider addressProvider,
+              IInfoAdapter infoAdapter,
+              IStakingInfoAdapter stakingInfoAdapter,
+              ILoggerFactory loggerFactory)
+      {
             _transactionProvider = transactionProvider;
             _blockProvider = blockProvider;
             _addressProvider = addressProvider;
@@ -51,12 +51,12 @@ namespace Blockexplorer.BlockProvider
 
         public async Task<Info> GetInfo()
         {
-          return await _infoAdapter.GetInfo();
+            return await _infoAdapter.GetInfo();
         }
 
         public async Task<StakingInfo> GetStakingInfo()
         {
-          return await _stakingInfoAdapter.GetStakingInfo();
+            return await _stakingInfoAdapter.GetStakingInfo();
         }
     }
 }
