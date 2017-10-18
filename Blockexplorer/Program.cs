@@ -29,16 +29,15 @@ namespace Blockexplorer
 						});
 					options.UseSystemd();
 				})
-				//.UseUrls("http://*:80", "https://*:443")
+				
 				.UseContentRoot(Directory.GetCurrentDirectory())
-				//.UseIISIntegration()
 				.UseStartup<Startup>()
-				//.UseApplicationInsights()
-
 				.Build();
-
 			host.Run();
 		}
+		//.UseIISIntegration()
+		//.UseUrls("http://*:80", "https://*:443")
+		//.UseApplicationInsights()
 
 		public static string Version => Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 	}

@@ -106,8 +106,16 @@ namespace Blockexplorer.BlockProvider.Rpc
 						byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
 						Script script = new Script(decodedScript);
 						var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
-						BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
-						@out.Address = address.ToString();
+						if (pubKey != null)
+						{
+							BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
+							@out.Address = address.ToString();
+						}
+						else
+						{
+							@out.Address = script.ToString();
+						}
+						
 					}
 					else
 					{
