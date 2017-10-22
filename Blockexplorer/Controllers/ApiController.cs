@@ -55,7 +55,9 @@ namespace Blockexplorer.Controllers
                 var info = await _apiService.GetInfo();
                 if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
                     return StatusCode(StatusCodes.Status500InternalServerError);
-                return Json(new { moneySupply = Convert.ToInt32(info.MoneySupply) });
+				var withBurn = info.MoneySupply - 8800096.6m;
+
+				return Json(new { moneySupply = Convert.ToInt32(withBurn) });
             }
             catch (Exception)
             {
@@ -71,7 +73,8 @@ namespace Blockexplorer.Controllers
                 var info = await _apiService.GetInfo();
                 if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
                     return "-1";
-                return Convert.ToInt32(info.MoneySupply).ToString();
+	            var withBurn = info.MoneySupply - 8800096.6m;
+				return Convert.ToInt32(withBurn).ToString();
             }
             catch (Exception)
             {
