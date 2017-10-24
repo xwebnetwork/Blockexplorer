@@ -47,23 +47,21 @@ namespace Blockexplorer.BlockProvider.Rpc
 				var inp = new In { Index = index };
 
 				if (rpcIn.Coinbase == null)
-				{
-					string hexScript = rpcIn.ScriptSig.Hex;
-					byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
-					Script script = new Script(decodedScript);
-					PayToPubkeyHashTemplate template = new PayToPubkeyHashTemplate();
+                {
+                    // Retrieve the origin address by retrieving the previous transaction and extracting the receive address
+                    var previousTx = await _client.GetRawTransactionAsync(rpcIn.Txid);
 
-
-					PayToPubkeyHashScriptSigParameters param = template.ExtractScriptSigParameters(script);
-					if (param != null)
-					{
-						PubKey pubKey = param.PublicKey;
-						BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
-
-						inp.Address = address.ToString();
-					}
-					else inp.Address = "none";
-
+                    if (previousTx.Vout.Length == 1)
+                    {
+                        // Get the only address, as there is no change address created (full wallet amount was sent)
+                        inp.Address = previousTx.Vout[0].ScriptPubKey.Addresses.First();
+                    }
+                    else
+                    {
+                        // Pick the second output as the first is the "change" address created by Qt under the hood
+                        inp.Address = previousTx.Vout[1].ScriptPubKey.Addresses.First();
+                    }
+                    
 					inp.TransactionId = rpcIn.Txid;
 					inp.VOut = (int)rpcIn.Vout;
 					inp.Sequence = rpcIn.Sequence;
@@ -80,7 +78,6 @@ namespace Blockexplorer.BlockProvider.Rpc
 
 			if (transaction.TransactionIn[0].Coinbase != null)
 			{
-				//Debug.Assert(transaction.TransactionIn.Count == 1);
 				transaction.IsCoinBase = true;
 			}
 
