@@ -17,7 +17,7 @@
                         <br />
                         <form method="get" action="@Url.Action("Index", "Search")">
                             <div class="input-group" role="search">
-                                <input type="text" class="form-control input-lg" name="id" placeholder="Search blocks, transactions or addresses">
+                                <input type="text" class="form-control input-lg" name="id" placeholder="Search blocks, transactions or addresses" minlength="1" required="required">
                                 <span class="input-group-btn">
                                     <button class="btn btn-search" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
                                 </span>

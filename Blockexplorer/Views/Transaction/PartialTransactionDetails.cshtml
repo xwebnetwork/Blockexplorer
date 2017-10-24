@@ -46,6 +46,7 @@
                     {
                         <div class="address-item ">
                             <div class="amount">
+@*5-improved-display-minting-mining-transaction*@
                                 - @input.Value
 
                             </div>
@@ -61,11 +62,19 @@
                                     <br/>
                                     <a href="@Url.Action("Index", "Transaction", new { id = input.TransactionId })">@input.TransactionId</a>
                     }
+@*
+                                @input.Value
+                               
+                            </div>
+                            <div class="address">
+                                <a onclick="return false;" href="@Url.Action("Index", "Address", new { id = input.Address })">@input.Address</a>
+                                <br/>
+                                <a href="@Url.Action("Index", "Transaction", new { id = input.TransactionId })">@input.TransactionId</a>
+*@
                             </div>
                         </div>
                     }
                 }
-
             </div>
 
             <div class="outputs">
@@ -92,14 +101,6 @@
                             </div>
                         </div>
                     }
-                    <div class="address-item div-fees">
-                        <div class="amount">
-                            @(String.Format("{0:0.00######}", Model.Transaction.Fees))
-                        </div>
-                        <div class="address">
-                            Fees
-                        </div>
-                    </div>
                 </div>
             </div> 
         </div>

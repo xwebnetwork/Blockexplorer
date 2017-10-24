@@ -15,6 +15,7 @@ namespace Blockexplorer.Services
 
 		static DateTime _lastQuery = DateTime.MinValue;
 		static Info _info = new Info { Errors = "Not Initialzed" };
+		static StakingInfo _stakingInfo = new StakingInfo { Errors = "Not Initialzed" };
 		static readonly SemaphoreSlim Sem = new SemaphoreSlim(1, 1);
 
 		public ApiService(IBlockchainDataProvider blockchainProvider, ILoggerFactory loggerFactory)
@@ -39,6 +40,29 @@ namespace Blockexplorer.Services
 			{
 				_log.LogError(e.Message);
 				return new Info { Errors = "Exception" };
+			}
+			finally
+			{
+				Sem.Release();
+			}
+		}
+
+		public async Task<StakingInfo> GetStakingInfo()
+		{
+			if (UseCachedInfo())
+				return _stakingInfo;
+
+			await Sem.WaitAsync();
+			try
+			{
+				_stakingInfo = await _blockchainProvider.GetStakingInfo();
+				_lastQuery = DateTime.UtcNow;
+				return _stakingInfo;
+			}
+			catch (Exception e)
+			{
+				_log.LogError(e.Message);
+				return new StakingInfo { Errors = "Exception" };
 			}
 			finally
 			{
