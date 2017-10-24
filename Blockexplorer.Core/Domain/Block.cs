@@ -16,7 +16,8 @@ namespace Blockexplorer.Core.Domain
 		public string PreviousBlock { get; set; }
 		public string NextBlock { get; set; }
 		public IList<Transaction> Transactions { get; set; }
-		public string Chainwork { get; set; }
+        public bool IsProofOfStake { get; set; }
+        public string Chainwork { get; set; }
 		public string Bits { get; set; }
 		public string VersionHex { get; set; }
 		public uint Weight { get; set; }

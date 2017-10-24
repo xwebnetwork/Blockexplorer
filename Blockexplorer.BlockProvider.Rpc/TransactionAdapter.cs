@@ -84,6 +84,9 @@ namespace Blockexplorer.BlockProvider.Rpc
 			index = 0;
 			foreach (var output in tx.Vout)
 			{
+                if (output.ScriptPubKey.Addresses == null && string.IsNullOrEmpty(output.ScriptPubKey.Hex))
+                    continue;
+
 				var @out = new Out
 				{
 					TransactionId = transaction.TransactionId,
@@ -92,6 +95,7 @@ namespace Blockexplorer.BlockProvider.Rpc
 					AssetId = null,
 					Index = index++
 				};
+
 				if (output.ScriptPubKey.Addresses != null) // Satoshi 14.2
 					@out.Address = output.ScriptPubKey.Addresses.FirstOrDefault();
 				else
@@ -118,13 +122,22 @@ namespace Blockexplorer.BlockProvider.Rpc
 					{
 						@out.Address = "none";
 					}
+/*
 
+                if (output.ScriptPubKey.Addresses != null) // Satoshi 14.2
+                    @out.Address = output.ScriptPubKey.Addresses.FirstOrDefault();
+                else
+                {
+                    string hexScript = output.ScriptPubKey.Hex;
+					byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
+					Script script = new Script(decodedScript);
+					var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
+					BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
+					@out.Address = address.ToString();
 				}
-
+*/
 				transaction.TransactionsOut.Add(@out);
 			}
-
-
 
 			return transaction;
 		}

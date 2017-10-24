@@ -27,15 +27,42 @@
                         <div class="address">
                             <b>Mined coins</b>
                         </div>
-                    </div> 
+                    </div>
+                }
+                else if (Model.Transaction.Block.IsProofOfStake)
+                {
+                    <div class="address-item ">
+                        <div class="amount">
+
+                        </div>
+                        <div class="address">
+                            <b>Staked coins</b>
+                        </div>
+                    </div>
                 }
                 else
                 {
-
                     foreach (var input in Model.Transaction.TransactionIn.Where(input => input.AssetId == null))
                     {
                         <div class="address-item ">
                             <div class="amount">
+@*5-improved-display-minting-mining-transaction*@
+                                - @input.Value
+
+                            </div>
+                            <div class="address">
+                                <i class="fa fa-lg fa-arrow-left displ-fa"></i>
+                                @if (input.Address == null)
+                        {
+                                    <span>Unrecognized address</span>
+                                }
+                                else 
+                                {
+                                    <a onclick="return false;" href="@Url.Action("Index", "Address", new { id = input.Address })">@input.Address</a>
+                                    <br/>
+                                    <a href="@Url.Action("Index", "Transaction", new { id = input.TransactionId })">@input.TransactionId</a>
+                    }
+@*
                                 @input.Value
                                
                             </div>
@@ -43,6 +70,7 @@
                                 <a onclick="return false;" href="@Url.Action("Index", "Address", new { id = input.Address })">@input.Address</a>
                                 <br/>
                                 <a href="@Url.Action("Index", "Transaction", new { id = input.TransactionId })">@input.TransactionId</a>
+*@
                             </div>
                         </div>
                     }

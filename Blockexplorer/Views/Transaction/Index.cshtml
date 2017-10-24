@@ -30,10 +30,27 @@
                                     </td>
                                 }
                             </tr>
-                            <tr>
-                                <td class="no-wrap">Fee paid</td>
-                                <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
-                            </tr>
+                            @if (Model.Transaction.IsCoinBase)
+                            {
+                                <tr>
+                                    <td class="no-wrap">Proof of Work + Fee paid</td>
+                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
+                                </tr>
+                            }
+                            else if (Model.Transaction.Block.IsProofOfStake)
+                            {
+                                <tr>
+                                    <td class="no-wrap">Proof of Stake + Fee paid</td>
+                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="no-wrap">Fee paid</td>
+                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
+                                </tr>
+                            }
                             <tr>
                                 <td class="no-wrap">Size</td>
                                 <td class="expand-column">
