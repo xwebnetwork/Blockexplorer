@@ -96,46 +96,33 @@ namespace Blockexplorer.BlockProvider.Rpc
 					Index = index++
 				};
 
-				if (output.ScriptPubKey.Addresses != null) // Satoshi 14.2
-					@out.Address = output.ScriptPubKey.Addresses.FirstOrDefault();
-				else
-				{
-					string hexScript = output.ScriptPubKey.Hex;
-
-					if (!string.IsNullOrEmpty(hexScript))
-					{
-						byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
-						Script script = new Script(decodedScript);
-						var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
-						if (pubKey != null)
-						{
-							BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
-							@out.Address = address.ToString();
-						}
-						else
-						{
-							@out.Address = script.ToString();
-						}
-						
-					}
-					else
-					{
-						@out.Address = "none";
-					}
-/*
-
                 if (output.ScriptPubKey.Addresses != null) // Satoshi 14.2
                     @out.Address = output.ScriptPubKey.Addresses.FirstOrDefault();
                 else
                 {
                     string hexScript = output.ScriptPubKey.Hex;
-					byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
-					Script script = new Script(decodedScript);
-					var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
-					BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
-					@out.Address = address.ToString();
-				}
-*/
+
+                    if (!string.IsNullOrEmpty(hexScript))
+                    {
+                        byte[] decodedScript = Encoders.Hex.DecodeData(hexScript);
+                        Script script = new Script(decodedScript);
+                        var pubKey = PayToPubkeyTemplate.Instance.ExtractScriptPubKeyParameters(script);
+                        if (pubKey != null)
+                        {
+                            BitcoinPubKeyAddress address = pubKey.GetAddress(NetworkSpec.ObsidianMain());
+                            @out.Address = address.ToString();
+                        }
+                        else
+                        {
+                            @out.Address = script.ToString();
+                        }
+
+                    }
+                    else
+                    {
+                        @out.Address = "none";
+                    }
+                }
 				transaction.TransactionsOut.Add(@out);
 			}
 
