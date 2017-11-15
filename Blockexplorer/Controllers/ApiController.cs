@@ -9,8 +9,10 @@ namespace Blockexplorer.Controllers
     public class ApiController : Controller
     {
         readonly IApiService _apiService;
+	    const decimal Burn = 8800096.6m;
 
-        public ApiController(IApiService apiService)
+
+		public ApiController(IApiService apiService)
         {
             _apiService = apiService;
         }
@@ -23,6 +25,7 @@ namespace Blockexplorer.Controllers
                 var info = await _apiService.GetInfo();
                 if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
                     return StatusCode(StatusCodes.Status500InternalServerError);
+	            info.MoneySupply = info.MoneySupply - Burn;
                 return Json(new { info = info });
             }
             catch (Exception)
@@ -55,7 +58,7 @@ namespace Blockexplorer.Controllers
                 var info = await _apiService.GetInfo();
                 if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
                     return StatusCode(StatusCodes.Status500InternalServerError);
-				var withBurn = info.MoneySupply - 8800096.6m;
+				var withBurn = info.MoneySupply - Burn;
 
 				return Json(new { moneySupply = Convert.ToInt32(withBurn) });
             }
