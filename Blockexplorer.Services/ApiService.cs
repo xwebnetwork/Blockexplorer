@@ -26,7 +26,7 @@ namespace Blockexplorer.Services
 
 		public async Task<Info> GetInfo()
 		{
-			if (UseCachedInfo())
+			if (UseCachedInfo() && _info != null)
 				return _info;
 
 			await Sem.WaitAsync();
