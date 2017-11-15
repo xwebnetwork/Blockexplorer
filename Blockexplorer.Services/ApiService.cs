@@ -49,7 +49,7 @@ namespace Blockexplorer.Services
 
 		public async Task<StakingInfo> GetStakingInfo()
 		{
-			if (UseCachedInfo())
+			if (UseCachedInfo() && _stakingInfo != null)
 				return _stakingInfo;
 
 			await Sem.WaitAsync();
