@@ -9,10 +9,10 @@ namespace Blockexplorer.Core.Domain
         public int CurrentBlockSize { get; set; }
         public int CurrentBlockTx { get; set; }
         public int PooledTx { get; set; }
-        public decimal Difficulty { get; set; }
+        public double Difficulty { get; set; }
         public int SearchInterval { get; set; }
-        public int NetStakeWeight { get; set; }
-        public int Weight { get; set; }
+        public long NetStakeWeight { get; set; }
+        public long Weight { get; set; }
         public int ExpectedTime { get; set; }
     }
 }
