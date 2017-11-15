@@ -146,8 +146,8 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 		public async Task<GetStakingInfoRpcModel> GetStakingInfo()
 		{
 			var json = await InvokeMethod("getstakinginfo");
-			var result = JsonConvert.DeserializeObject<GetStakingInfoRpcModel>(json);
-			return result;
+			var result = JsonConvert.DeserializeObject<TransportRpcModel<GetStakingInfoRpcModel>>(json);
+			return result.Result;
 		}
 	}
 
