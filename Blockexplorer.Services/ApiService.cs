@@ -13,7 +13,8 @@ namespace Blockexplorer.Services
 		readonly IBlockchainDataProvider _blockchainProvider;
 		readonly ILogger _log;
 
-		static DateTime _lastQuery = DateTime.MinValue;
+		static DateTime _lastQueryInfo = DateTime.MinValue;
+		static DateTime _lastQueryGetStakingInfo = DateTime.MinValue;
 		static Info _info = new Info { Errors = "Not Initialzed" };
 		static StakingInfo _stakingInfo = new StakingInfo { Errors = "Not Initialzed" };
 		static readonly SemaphoreSlim Sem = new SemaphoreSlim(1, 1);
@@ -33,7 +34,7 @@ namespace Blockexplorer.Services
 			try
 			{
 				_info = await _blockchainProvider.GetInfo();
-				_lastQuery = DateTime.UtcNow;
+				_lastQueryInfo = DateTime.UtcNow;
 				return _info;
 			}
 			catch (Exception e)
@@ -49,14 +50,14 @@ namespace Blockexplorer.Services
 
 		public async Task<StakingInfo> GetStakingInfo()
 		{
-			if (UseCachedInfo() && _stakingInfo != null)
+			if (UseCachedStakingInfo() && _stakingInfo != null)
 				return _stakingInfo;
 
 			await Sem.WaitAsync();
 			try
 			{
 				_stakingInfo = await _blockchainProvider.GetStakingInfo();
-				_lastQuery = DateTime.UtcNow;
+				_lastQueryGetStakingInfo = DateTime.UtcNow;
 				return _stakingInfo;
 			}
 			catch (Exception e)
@@ -73,7 +74,17 @@ namespace Blockexplorer.Services
 		static bool UseCachedInfo()
 		{
 			var now = DateTime.UtcNow;
-			var last = _lastQuery;
+			var last = _lastQueryInfo;
+			TimeSpan elapsed = now - last;
+			if (elapsed.TotalSeconds > 60)
+				return false;
+			return true;
+		}
+
+		static bool UseCachedStakingInfo()
+		{
+			var now = DateTime.UtcNow;
+			var last = _lastQueryGetStakingInfo;
 			TimeSpan elapsed = now - last;
 			if (elapsed.TotalSeconds > 60)
 				return false;
