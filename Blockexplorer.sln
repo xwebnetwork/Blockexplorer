@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer", "Blockexplorer\Blockexplorer.csproj", "{A71CB76B-D76F-4247-BF53-CA76374C2074}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBitcoin", "NStratis\NBitcoin\NBitcoin.csproj", "{06D44330-3F04-4CF3-89A3-574B7A49CFFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashLib", "NStratis\Hashing\HashLib\HashLib.csproj", "{1815C4E9-BE65-4DAF-BC49-B36468CA0948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockexplorer.Entities", "Blockexplorer.Entities\Blockexplorer.Entities.csproj", "{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockexplorer.Indexer", "Blockexplorer.Indexer\Blockexplorer.Indexer.csproj", "{DD3D18C1-492F-407C-8A1F-208F503DB5CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{1815C4E9-BE65-4DAF-BC49-B36468CA0948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1815C4E9-BE65-4DAF-BC49-B36468CA0948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1815C4E9-BE65-4DAF-BC49-B36468CA0948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD3D18C1-492F-407C-8A1F-208F503DB5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD3D18C1-492F-407C-8A1F-208F503DB5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD3D18C1-492F-407C-8A1F-208F503DB5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD3D18C1-492F-407C-8A1F-208F503DB5CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

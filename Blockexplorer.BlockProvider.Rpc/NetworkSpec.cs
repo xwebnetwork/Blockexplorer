@@ -5,7 +5,7 @@ using NBitcoin.DataEncoders;
 
 namespace Blockexplorer.BlockProvider.Rpc
 {
-    class NetworkSpec
+    public class NetworkSpec
     {
 	    static Network _mainnet;
 

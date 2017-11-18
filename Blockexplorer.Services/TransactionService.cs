@@ -48,10 +48,10 @@ namespace Blockexplorer.Services
 
 	                foreach (var @in in transaction.TransactionIn)
 	                {
-						if(@in.TransactionId == null)
+						if(@in.PrevTxIdPointer == null)
 							continue;
-		                var inputTransaction = await BlockchainDataProvider.GetTransaction(@in.TransactionId);
-		                @in.Value = inputTransaction.TransactionsOut[@in.VOut].Value;
+		                var inputTransaction = await BlockchainDataProvider.GetTransaction(@in.PrevTxIdPointer);
+		                @in.PrevVOutFetchedValue = inputTransaction.TransactionsOut[@in.PrevVOutPointer].Value;
 	                }
                 }
             }

@@ -52,7 +52,7 @@ namespace Blockexplorer
 			services.AddTransient<IBlockProvider, BlockAdapter>();
 			services.AddTransient<IAddressProvider, AddressAdapter>();
 			services.AddTransient<IAddressService, AddressService>();
-			services.AddTransient<IAddressRepository, AddressRepositoryStub>();
+			services.AddTransient<IAddressRepository, AddressRepository>();
 			services.AddTransient<IBlockRepository, BlockRepositoryStub>();
 			services.AddTransient<ITransactionService, TransactionService>();
 			services.AddTransient<ITransactionRepository, TransactionRepositoryStub>();
