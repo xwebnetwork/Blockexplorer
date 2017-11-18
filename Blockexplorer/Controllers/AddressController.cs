@@ -21,6 +21,7 @@ namespace Blockexplorer.Controllers
 	    public async Task<ActionResult> Index(string id, int page = 0)
 
 	    {
+			throw new NotImplementedException();
 		    try
 		    {
 			    if (string.IsNullOrEmpty(id))
