@@ -79,6 +79,7 @@
     <ProjectReference Include="..\Blockexplorer.BlockProvider.Rpc\Blockexplorer.BlockProvider.Rpc.csproj" />
     <ProjectReference Include="..\Blockexplorer.BlockProvider\Blockexplorer.BlockProvider.csproj" />
     <ProjectReference Include="..\Blockexplorer.Core\Blockexplorer.Core.csproj" />
+    <ProjectReference Include="..\Blockexplorer.Entities\Blockexplorer.Entities.csproj" />
     <ProjectReference Include="..\Blockexplorer.Services\Blockexplorer.Services.csproj" />
   </ItemGroup>
   <ItemGroup>

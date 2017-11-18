@@ -7,84 +7,84 @@
 <div class="container">
     <header class="top-nav-links clearfix">
         <h1>Transaction</h1>
-        <div class="tr-h-top">@Model.Transaction.TransactionId</div>
+        <table class="table table-rounded ">
+            <tbody>
+                <tr>
+                    <td class="no-wrap">Hash / txid</td>
+                    <td class="expand-column">@Model.Transaction.TransactionId</td>
+                </tr>
+
+            </tbody>
+        </table>
     </header>
 
     <div class="page-content">
         <div class="transaction-explorer">
             <div class="row">
                 <div class="col-md-7">
-                    <div class="title-bl">Advanced details</div>
+                    <div class="title-bl">Details</div>
                     <table class="table table-rounded ">
                         <tbody>
                             <tr>
-                                <td class="no-wrap">Hash</td>
-                                <td class="expand-column">@Model.Transaction.TransactionId</td>
+                                <td class="no-wrap">Type</td>
+                                <td class="expand-column">@Model.Transaction.GetTransactionTypeText()</td>
                             </tr>
                             <tr>
-                                @if (Model.Transaction.Block != null)
-                                {
-                                    <td class="no-wrap">Date</td>
-                                    <td class="expand-column">
-                                        @($"{Model.Transaction.Block.Time:F}")
-                                    </td>
-                                }
-                            </tr>
-                            @if (Model.Transaction.IsCoinBase)
-                            {
-                                <tr>
-                                    <td class="no-wrap">Proof of Work + Fee paid</td>
-                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
-                                </tr>
-                            }
-                            else if (Model.Transaction.Block.IsProofOfStake)
-                            {
-                                <tr>
-                                    <td class="no-wrap">Proof of Stake + Fee paid</td>
-                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
-                                </tr>
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td class="no-wrap">Fee paid</td>
-                                    <td class="expand-column">@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</td>
-                                </tr>
-                            }
-                            <tr>
-                                <td class="no-wrap">Size</td>
+                                <td class="no-wrap">Received</td>
                                 <td class="expand-column">
-                                   @Model.Transaction.Size bytes
+                                    @($"{Model.Transaction.Time:F}")
                                 </td>
-                            </tr> 
+                            </tr>
+                          
+                                <tr>
+                                    <td class="no-wrap">Fee</td>
+                                    <td class="expand-column">
+                                        @if(Model.Transaction.TransactionType == Blockexplorer.Core.Domain.TransactionType.PoS_Reward || Model.Transaction.TransactionType == Blockexplorer.Core.Domain.TransactionType.PoW_Reward_Coinbase)
+                                        {
+                                            <text>N/A</text>}
+                                        else
+                                        {
+                                            <text>@(String.Format("{0:0.00######}", Model.Transaction.Fees)) ODN</text>
+
+
+                                        }
+                                   
+                                    </td>
+                                </tr>
+                               
+                            <tr>
+                                <td class="no-wrap">Block Height</td>
+                                <td class="expand-column">
+                                    <a href="@Url.Action("Index", "Block", new { id = Model.Transaction.Block.Height })">@Model.Transaction.Block.Height</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="col-md-5">
                     @if (Model.Transaction.Block != null)
                     {
-                        <div class="title-bl">Transaction confirmed</div>
+                        <div class="title-bl">Block</div>
                         <table class="table table-rounded ">
                             <tbody>
                                 <tr>
                                     <td class="no-wrap">Confirmations</td>
-                                    <td class="expand-column">@Model.Transaction.Block.Confirmations confirmations</td>
+                                    <td class="expand-column">@Model.Transaction.Block.Confirmations Confirmations</td>
                                 </tr>
                                 <tr>
                                     <td class="no-wrap">Time</td>
                                     <td class="expand-column">@($"{Model.Transaction.Block.Time:F}")</td>
                                 </tr>
-                                <tr> 
-                                    <td class="no-wrap">Block</td>
+                                <tr>
+                                    <td class="no-wrap">Block Hash</td>
                                     <td class="expand-column"><a href="@Url.Action("Index", "Block", new { id = Model.Transaction.Block.Hash })">@Model.Transaction.Block.Hash</a></td>
                                 </tr>
                                 <tr>
-                                    <td class="no-wrap">Height</td>
-                                    <td class="expand-column">@Model.Transaction.Block.Height</td>
+                                    <td class="no-wrap">Proof-of-Stake</td>
+                                    <td class="expand-column">@Model.Transaction.Block.IsProofOfStake</td>
                                 </tr>
                             </tbody>
-                        </table>
-                    }
+                        </table>}
                 </div>
             </div>
             <div class="panel panel-default transaction-details tr-de-inner detal-tr-inner @divclass">

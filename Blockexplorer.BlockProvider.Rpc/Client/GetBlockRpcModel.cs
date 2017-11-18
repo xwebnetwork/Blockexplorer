@@ -14,7 +14,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
     }
 
 
-    public class GetBlockRpcModel
+    public class GetBlockRpcModel : RpcModelBase
     {
 		/// <summary>
 	    /// The block' hash.

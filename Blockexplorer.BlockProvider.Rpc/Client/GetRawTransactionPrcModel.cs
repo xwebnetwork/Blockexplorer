@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Blockexplorer.BlockProvider.Rpc.Client
 {
-	public class GetRawTransactionPrcModel
+	public class GetRawTransactionRpcModel : RpcModelBase
 	{
 		[JsonProperty("hex")]
 		public string Hex { get; set; }
@@ -143,6 +143,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			public int N { get; set; }
 			[JsonProperty("scriptPubKey")]
 			public ScriptPubKeyModel ScriptPubKey { get; set; }
+			
 
 			public class ScriptPubKeyModel
 			{
@@ -150,6 +151,8 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 				public string[] Addresses { get; set; }
 				[JsonProperty("hex")]
 				public string Hex { get; set; }
+				[JsonProperty("type")]
+				public string Type { get; set; }
 			}
 		}
 	}

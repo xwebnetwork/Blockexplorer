@@ -34,7 +34,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 				webRequest.Credentials = new NetworkCredential(_settings.User, _settings.Password);
 				string username = _settings.User;
 				string password = _settings.Password;
-				Console.WriteLine($"Url: {_settings.Url}, User: {username}, Pass: {password}");
+				//Console.WriteLine($"Url: {_settings.Url}, User: {username}, Pass: {password}");
 				string svcCredentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(username + ":" + password));
 
 				webRequest.Headers["Authorization"] = "Basic " + svcCredentials;
@@ -94,17 +94,29 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			return result.Result;
 		}
 
-		public async Task<GetRawTransactionPrcModel> GetRawTransactionAsync(string txid, int jsonResult = 1)
+		public async Task<GetRawTransactionRpcModel> GetRawTransactionAsync(string txid, int jsonResult = 1)
 		{
-			var json = await InvokeMethod("getrawtransaction", txid, jsonResult);
-			var result = JsonConvert.DeserializeObject<TransportRpcModel<GetRawTransactionPrcModel>>(json);
-			return result.Result;
+			try
+			{
+				var json = await InvokeMethod("getrawtransaction", txid, jsonResult);
+				var result = JsonConvert.DeserializeObject<TransportRpcModel<GetRawTransactionRpcModel>>(json);
+				if (result?.Result == null)
+					return null;
+				result.Result.OriginalJson = json;
+				return result.Result;
+			}
+			catch { }
+			return null;
+			
 		}
 
 		public async Task<GetBlockRpcModel> GetBlockAsync(string hash)
 		{
 			var json = await InvokeMethod("getblock", hash);
 			var result = JsonConvert.DeserializeObject<TransportRpcModel<GetBlockRpcModel>>(json);
+			if (result?.Result == null)
+				return null;
+			result.Result.OriginalJson = json;
 			return result.Result;
 		}
 
@@ -164,7 +176,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			return time.FromUnixDateTime();
 		}
 
-		public static RpcTransaction Create(GetRawTransactionPrcModel txData, long height)
+		public static RpcTransaction Create(GetRawTransactionRpcModel txData, long height)
 		{
 			return new RpcTransaction
 			{

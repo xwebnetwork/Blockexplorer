@@ -32,12 +32,7 @@ namespace Blockexplorer.Services
 
             try
             {
-                address = await BlockchainDataProvider.GetAddress(id);
-
-                if(address != null)
-                {
-                    await AddressRepository.UpdateAddress(address);
-                }
+                address = await AddressRepository.GetById(id);
             }
             catch(Exception ex)
             {
