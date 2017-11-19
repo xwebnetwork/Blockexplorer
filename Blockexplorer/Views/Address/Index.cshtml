@@ -1,7 +1,7 @@
 ﻿@using Blockexplorer.Models
 @model Blockexplorer.Models.AddressModel
 @{
-    ViewData["Title"] = "Address - " + Model.Address.Hash;
+    ViewData["Title"] = "Address - " + Model.Address.Id;
     Layout = "~/Views/Shared/_LayoutInner.cshtml";
 }
 
@@ -18,19 +18,17 @@
                     <tbody>
                         <tr>
                             <td class="no-wrap">Address</td>
-                            <td class="expand-column">@Model.Address.Hash</td>
+                            <td class="expand-column">@Model.Address.Id</td>
                         </tr>
                         <tr>
                             <td class="no-wrap">Total transactions</td>
                             <td class="expand-column">@Model.Address.TotalTransactions</td>
                         </tr>
-                        @if (Model.Address.UncoloredAddress != null)
-                        {
-                            <tr>
-                                <td class="no-wrap">Legacy address</td>
-                                <td class="expand-column"><a href="@Url.Action("Index", "Address", new { id = Model.Address.UncoloredAddress })">@Model.Address.UncoloredAddress</a></td>
-                            </tr>
-                        }
+                        <tr>
+                            <td class="no-wrap">Last change in block</td>
+                            <td class="expand-column"><a href="@Url.Action("Index", "Block", new { id = Model.Address.LastModifiedBlockHeight })">@Model.Address.LastModifiedBlockHeight</a></td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -42,17 +40,15 @@
                     <ul class="list-group">
                         <li class="list-group-item clearfix">
                             <span class="currency-icon thumbnail dspl-icon">
-                                <span class="bg-warning">
-                                    <i class="fa fa-btc"></i>
-                                </span>
+                                <img src="~/images/favicon.png" style="width: 50px" />
                             </span>
                             <div class="details-left balance-left">
-                                <h4 class="list-group-item-heading">Bitcoin</h4>
+                                <h4 class="list-group-item-heading">Obsidian</h4>
                                 <p class="list-group-item-text text-muted"></p>
                             </div>
                             <div class="details-right text-right">
-                                <h4 class="list-group-item-heading">@Model.Address.Balance) ODN</h4>
-                            </div> 
+                                <h4 class="list-group-item-heading">@Model.Address.Balance ODN</h4>
+                            </div>
                         </li>
 
                     </ul>
@@ -65,13 +61,13 @@
         <hr>
         <h3 class="transactions-header">Transactions</h3>
         @for (var i = Model.Start; i < Model.Max; i++)
-        { 
-            var tr = Model.Address.Transactions[i];
+        {
+            var txid = Model.Address.TxIds[i];
 
             <div class="panel panel-success transaction-details">
                 <div class="panel-heading row">
                     <h3 class="panel-title address-transaction-header col-sm-7">
-                        <a href="@Url.Action("Index", "Transaction", new { id = tr.TransactionId })">@tr.TransactionId</a>
+                        <a href="@Url.Action("Index", "Transaction", new { id = txid })">@txid</a>
                     </h3>
                     <div class="col-sm-3 text-center tr-date"></div>
                     <div class="confirmation-label col-sm-2 text-center">
@@ -82,7 +78,7 @@
                 <ul class="list-group">
 
                     <li class="list-group-item clearfix section-header">
-                        <h3 class="panel-title hd-bt">Bitcoin</h3>
+                        <h3 class="panel-title hd-bt">Obsidian</h3>
                     </li>
 
                     <li class="list-group-item clearfix intput-output-group-list-item">
@@ -90,12 +86,10 @@
                         <div class="intput-output-group show-details">
                             <div class="icon dspl-icon">
                                 <span class="currency-icon thumbnail">
-                                    <span class="bg-warning">
-                                        <i class="fa fa-btc"></i>
-                                    </span>
+                                    <img src="~/images/favicon.png" style="width: 40px" />
                                 </span>
                             </div>
-                            <div class="show-details-load" data-tx="@tr.TransactionId"><a href="">show details</a></div>
+                            <div class="show-details-load" data-tx="@txid"><a href="">show details</a></div>
                         </div>
 
                     </li>
@@ -115,22 +109,21 @@
                         if (i == Model.CurrentPage)
                         {
                             <li class="active"><a>@(i + 1)</a></li>
-                        }
+}
                         else
                         {
-                            <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Hash, page = i })">@(i + 1)</a></li>
-                        }
+                            <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Id, page = i })">@(i + 1)</a></li>
+}
                     }
                 }
                 else
                 {
                     if (5 < Model.CurrentPage)
                     {
-                        <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Hash, page = 0 })">1</a></li>
-                        if (6 < Model.CurrentPage)
+                        <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Id, page = 0 })">1</a></li>if (6 < Model.CurrentPage)
                         {
                             <li class="disabled"><span>…</span></li>
-                        }
+}
 
                     }
 
@@ -143,11 +136,11 @@
                             if (i == Model.CurrentPage)
                             {
                                 <li class="active"><a>@(i + 1)</a></li>
-                            }
+}
                             else
                             {
-                                <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Hash, page = i })">@(i + 1)</a></li>
-                            }
+                                <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Id, page = i })">@(i + 1)</a></li>
+}
 
 
                         }
@@ -160,11 +153,11 @@
                             if (i == Model.CurrentPage)
                             {
                                 <li class="active"><a>@(i + 1)</a></li>
-                            }
+}
                             else
                             {
-                                <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Hash, page = i })">@(i + 1)</a></li>
-                            }
+                                <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Id, page = i })">@(i + 1)</a></li>
+}
                         }
                     }
 
@@ -172,8 +165,8 @@
                     if (Model.CurrentPage + 9 < Model.Count)
                     {
                         <li class="disabled"><span>…</span></li>
-                        <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Hash, page = Model.Count - 1 })">@Model.Count</a></li>
-                    }
+                        <li><a href="@Url.Action("Index", "Address", new { id = Model.Address.Id, page = Model.Count - 1 })">@Model.Count</a></li>
+}
                 }
 
             </ul>

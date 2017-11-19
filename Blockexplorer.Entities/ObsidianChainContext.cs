@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blockexplorer.Entities
 {
@@ -11,33 +12,45 @@ namespace Blockexplorer.Entities
 	public class ObsidianChainContext : DbContext
 	{
 		static string _connectionString;
-		public DbSet<BlockEntity> Blocks { get; set; }
-		public DbSet<TransactionEntity> Transactions { get; set; }
-		public DbSet<TransactionAddressEntity> TransactionAddresses { get; set; }
+		public DbSet<BlockEntity> BlockEntities { get; set; }
+		public DbSet<TransactionEntity> TransactionEntities { get; set; }
+		public DbSet<AddressEntity> AddressEntities { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			if(_connectionString == null)
+			if (_connectionString == null)
 			{
 				var location = System.Reflection.Assembly.GetEntryAssembly().Location;
 				var directory = Path.GetDirectoryName(location);
 				var csPath = Path.Combine(directory, "connectionstring.secret");
-				_connectionString = File.ReadAllText(csPath);
+				if (File.Exists(csPath))
+					_connectionString = File.ReadAllText(csPath);
+				else
+				{
+					// if the file does not exists, we are probably running ef tools
+					string pathForEfTools = @"C:\NObsidian\Blockexplorer\Blockexplorer.Entities\connectionstring.secret";
+					_connectionString = File.ReadAllText(pathForEfTools);
+				}
 			}
-				
+
 			optionsBuilder.UseSqlServer(_connectionString);
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<TransactionAddressEntity>()
-				.HasIndex(p => new { p.Address }).ForSqlServerIsClustered(false).IsUnique(false);
+			modelBuilder.Entity<BlockEntity>()
+				.HasIndex(p => new { p.BlockHash }).ForSqlServerIsClustered(false).IsUnique();
 		}
 	}
 
 	public class BlockEntity
 	{
-		public Guid Id { get; set; }
+		/// <summary>
+		/// Blocknumber, starting with 1, Height = 0
+		/// </summary>
+		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		public int Id { get; set; }
 		public int Height { get; set; }
+		[MaxLength(64)]
 		public string BlockHash { get; set; }
 		public List<TransactionEntity> Transactions { get; set; }
 		public string BlockData { get; set; }
@@ -45,19 +58,23 @@ namespace Blockexplorer.Entities
 
 	public class TransactionEntity
 	{
+		[MaxLength(64)]
 		public string Id { get; set; }
 		public BlockEntity BlockEntity { get; set; }
 		public string TransactionData { get; set; }
-		public List<TransactionAddressEntity> TransactionAddresses { get; set; }
 	}
 
-	public class TransactionAddressEntity
-	{
-		public int Id { get; set; }
-		public TransactionEntity TransactionEntity { get; set; }
-		public string TransactionEntityId { get; set; }
 
+
+	public class AddressEntity
+	{
 		[MaxLength(34)]
-		public string Address { get; set; }
+		public string Id { get; set; }
+
+		[Column(TypeName = "decimal(18,8)")]
+		public decimal Balance { get; set; }
+		public string TxIdBlob { get; set; }
+
+		public int LastModifiedBlockHeight { get; set; }
 	}
 }

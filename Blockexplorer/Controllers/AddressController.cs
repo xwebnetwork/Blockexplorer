@@ -18,11 +18,12 @@ namespace Blockexplorer.Controllers
 	    }
 
 	    [Route("address/{id}")]
-	    public async Task<ActionResult> Index(string id, int page = 0)
-
+	    public async Task<ActionResult> Index(string id, string show, int page = 0)
 	    {
-			throw new NotImplementedException();
-		    try
+			if(show == null)
+				return View("_NotFound");
+
+			try
 		    {
 			    if (string.IsNullOrEmpty(id))
 			    {

@@ -11,8 +11,8 @@ using System;
 namespace Blockexplorer.Entities.Migrations
 {
     [DbContext(typeof(ObsidianChainContext))]
-    [Migration("20171117221511_TransactionEntityId")]
-    partial class TransactionEntityId
+    [Migration("20171118165453_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,48 +21,52 @@ namespace Blockexplorer.Entities.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Blockexplorer.Entities.AddressEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(34);
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,8)");
+
+                    b.Property<int>("LastModifiedBlockHeight");
+
+                    b.Property<string>("TxIdBlob");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AddressEntities");
+                });
+
             modelBuilder.Entity("Blockexplorer.Entities.BlockEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("BlockData");
 
-                    b.Property<string>("BlockHash");
+                    b.Property<string>("BlockHash")
+                        .HasMaxLength(64);
 
                     b.Property<int>("Height");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Blocks");
-                });
-
-            modelBuilder.Entity("Blockexplorer.Entities.TransactionAddressEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(34);
-
-                    b.Property<string>("TransactionEntityId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Address")
+                    b.HasIndex("BlockHash")
+                        .IsUnique()
+                        .HasFilter("[BlockHash] IS NOT NULL")
                         .HasAnnotation("SqlServer:Clustered", false);
 
-                    b.HasIndex("TransactionEntityId");
-
-                    b.ToTable("TransactionAddresses");
+                    b.ToTable("BlockEntities");
                 });
 
             modelBuilder.Entity("Blockexplorer.Entities.TransactionEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(64);
 
-                    b.Property<Guid?>("BlockEntityId");
+                    b.Property<int?>("BlockEntityId");
 
                     b.Property<string>("TransactionData");
 
@@ -70,14 +74,7 @@ namespace Blockexplorer.Entities.Migrations
 
                     b.HasIndex("BlockEntityId");
 
-                    b.ToTable("Transactions");
-                });
-
-            modelBuilder.Entity("Blockexplorer.Entities.TransactionAddressEntity", b =>
-                {
-                    b.HasOne("Blockexplorer.Entities.TransactionEntity", "TransactionEntity")
-                        .WithMany("TransactionAddresses")
-                        .HasForeignKey("TransactionEntityId");
+                    b.ToTable("TransactionEntities");
                 });
 
             modelBuilder.Entity("Blockexplorer.Entities.TransactionEntity", b =>

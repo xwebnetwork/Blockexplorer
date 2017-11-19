@@ -1,9 +1,8 @@
 ﻿using Blockexplorer.Core.Repositories;
-using System.Linq;
+using System;
 using Blockexplorer.Core.Domain;
 using System.Threading.Tasks;
 using Blockexplorer.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
 namespace Blockexplorer.Services
@@ -12,18 +11,26 @@ namespace Blockexplorer.Services
 	{
 		public async Task<Address> GetById(string id)
 		{
+			if (string.IsNullOrWhiteSpace(id))
+				return null;
+
+			id = id.Trim();
+			if (id.Length != 34 && !id.Equals("OP_RETURN", StringComparison.OrdinalIgnoreCase))
+				return null;
+
 			using (var db = new ObsidianChainContext())
 			{
-				var transactionAddresses = db.TransactionAddresses.Where(x => x.Address == id).ToList();
-				if (transactionAddresses.Count == 0)
+				var addressEntity = await  db.AddressEntities.FindAsync(id);
+				if (addressEntity== null)
 					return null;
 
 				List<Transaction> transactions = new List<Transaction>();
-				foreach (var txadr in transactionAddresses)
+				string[] txids = addressEntity.TxIdBlob.Split("\r\n");
+				foreach (var txid in txids)
 				{
 					var transaction = new Transaction
 					{
-						TransactionId = txadr.TransactionEntityId
+						TransactionId = txid
 					};
 					transactions.Add(transaction);
 					
@@ -31,9 +38,13 @@ namespace Blockexplorer.Services
 
 				var address = new Address
 				{
-					UncoloredAddress = id,
-					Transactions = transactions,
-					TotalTransactions = transactions.Count
+					Id = id,
+					Balance = addressEntity.Balance,
+					LastModifiedBlockHeight = addressEntity.LastModifiedBlockHeight,
+					TxIds = txids,
+					TotalTransactions = txids.Length,
+					Transactions = null,
+					ColoredAddress = null
 				};
 				return address;
 			}

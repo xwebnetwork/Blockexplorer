@@ -29,8 +29,8 @@ namespace Blockexplorer.BlockProvider.Rpc
 	        try
 	        {
 		        string blockHash = null;
-		        uint blocknumber;
-		        if (input.Length != 64 && uint.TryParse(input, out blocknumber))
+		        int blocknumber;
+		        if (input.Length != 64 && int.TryParse(input, out blocknumber))
 		        {
 			        try
 			        {

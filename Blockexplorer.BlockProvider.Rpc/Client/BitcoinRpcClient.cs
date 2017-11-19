@@ -3,12 +3,20 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Blockexplorer.Core.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Options;
 
 namespace Blockexplorer.BlockProvider.Rpc.Client
 {
+	public class UserOptions<T> : IOptions<T> where T : class, new()
+	{
+		public UserOptions()
+		{
+		}
+
+		public T Value { get; set; }
+	}
 	public class RpcSettings
 	{
 		public string User { get; set; }
@@ -120,7 +128,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			return result.Result;
 		}
 
-		public async Task<string> GetBlockHashAsync(uint blockNumber)
+		public async Task<string> GetBlockHashAsync(int blockNumber)
 		{
 			var json = await InvokeMethod("getblockhash", blockNumber);
 			var result = JsonConvert.DeserializeObject<TransportRpcModel<string>>(json);

@@ -83,6 +83,9 @@
     <ProjectReference Include="..\Blockexplorer.Services\Blockexplorer.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="ssl.secret">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="wildcard_obsidianplatform_com.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

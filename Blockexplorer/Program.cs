@@ -22,8 +22,16 @@ namespace Blockexplorer
 							try
 							{
 								listenOptions.NoDelay = true;
-								listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", args[0]); // hk
-								listenOptions.UseConnectionLogging();
+								var location = Assembly.GetEntryAssembly().Location;
+								var directory = Path.GetDirectoryName(location);
+								var passPath = Path.Combine(directory, "ssl.secret");
+								if (File.Exists(passPath))
+								{
+									string pass = File.ReadAllText(passPath);
+									listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass);
+									listenOptions.UseConnectionLogging();
+								}
+								
 							}
 							catch (Exception) { }
 						});

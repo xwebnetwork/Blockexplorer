@@ -17,9 +17,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBitcoin", "NStratis\NBitco
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HashLib", "NStratis\Hashing\HashLib\HashLib.csproj", "{1815C4E9-BE65-4DAF-BC49-B36468CA0948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockexplorer.Entities", "Blockexplorer.Entities\Blockexplorer.Entities.csproj", "{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.Entities", "Blockexplorer.Entities\Blockexplorer.Entities.csproj", "{5AACE381-879F-4C01-B8DE-0BCDFD042DBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockexplorer.Indexer", "Blockexplorer.Indexer\Blockexplorer.Indexer.csproj", "{DD3D18C1-492F-407C-8A1F-208F503DB5CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockexplorer.Indexer", "Blockexplorer.Indexer\Blockexplorer.Indexer.csproj", "{DD3D18C1-492F-407C-8A1F-208F503DB5CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0283565B-1FCE-4B39-B244-1B1EDA84A7F0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		.gitmodules = .gitmodules
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
