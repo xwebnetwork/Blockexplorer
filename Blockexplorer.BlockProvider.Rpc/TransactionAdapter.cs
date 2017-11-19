@@ -121,9 +121,7 @@ namespace Blockexplorer.BlockProvider.Rpc
 						}
 						else
 						{
-							Debug.Assert(output.ScriptPubKey.Type == NonStandardAddress 
-								&& (transaction.TransactionType == TransactionType.PoS_Reward 
-								|| transaction.TransactionType == TransactionType.PoW_Reward_Coinbase));
+							Debug.Assert(output.ScriptPubKey.Type == NonStandardAddress);
 							@out.Address = output.ScriptPubKey.Type;
 						}
 					}
