@@ -29,9 +29,9 @@ namespace Blockexplorer
 								{
 									string pass = File.ReadAllText(passPath);
 									var certPath = Path.Combine(directory, "wildcard_obsidianplatform_com.pfx");
-									if(File.Exists(certPath))
+									if (File.Exists(certPath))
 									{
-										listenOptions.UseHttps(certPath, pass);
+										listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass);
 										listenOptions.UseConnectionLogging();
 									}
 									else
@@ -40,14 +40,14 @@ namespace Blockexplorer
 									}
 
 								}
-								
-								
+
+
 							}
-							catch (Exception) { }
+							catch (Exception e) { Console.WriteLine(e.Message); }
 						});
 					options.UseSystemd();
 				})
-				
+
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				.UseStartup<Startup>()
 				.Build();
