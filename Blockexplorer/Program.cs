@@ -28,9 +28,19 @@ namespace Blockexplorer
 								if (File.Exists(passPath))
 								{
 									string pass = File.ReadAllText(passPath);
-									listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass);
-									listenOptions.UseConnectionLogging();
+									var certPath = Path.Combine(directory, "wildcard_obsidianplatform_com.pfx");
+									if(File.Exists(certPath))
+									{
+										listenOptions.UseHttps(certPath, pass);
+										listenOptions.UseConnectionLogging();
+									}
+									else
+									{
+										Console.WriteLine("File not found: " + certPath);
+									}
+
 								}
+								
 								
 							}
 							catch (Exception) { }
