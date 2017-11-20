@@ -31,7 +31,7 @@ namespace Blockexplorer
 									var certPath = Path.Combine(directory, "wildcard_obsidianplatform_com.pfx");
 									if (File.Exists(certPath))
 									{
-										listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass);
+										listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass.Trim());
 										listenOptions.UseConnectionLogging();
 									}
 									else
