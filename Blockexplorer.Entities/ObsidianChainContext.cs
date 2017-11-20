@@ -24,12 +24,12 @@ namespace Blockexplorer.Entities
 				var directory = Path.GetDirectoryName(location);
 				var csPath = Path.Combine(directory, "connectionstring.secret");
 				if (File.Exists(csPath))
-					_connectionString = File.ReadAllText(csPath);
+					_connectionString = File.ReadAllText(csPath).Trim();
 				else
 				{
 					// if the file does not exists, we are probably running ef tools
 					string pathForEfTools = @"C:\NObsidian\Blockexplorer\Blockexplorer.Entities\connectionstring.secret";
-					_connectionString = File.ReadAllText(pathForEfTools);
+					_connectionString = File.ReadAllText(pathForEfTools).Trim();
 				}
 			}
 
