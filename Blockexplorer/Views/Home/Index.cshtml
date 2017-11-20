@@ -26,13 +26,17 @@
                         <p>
                             @if (@Model.LastBlock != null)
                             {
-                                <small>Last block: <a href="@Url.Action("Index", "Block", new {id = Model.LastBlock.Hash})">@Model.LastBlock.Height</a> - Mainnet</small>
+                                <small>Last block: <a href="@Url.Action("Index", "Block", new {id = Model.LastBlock.Hash})">@Model.LastBlock.Height</a> - Mainnet</small><br />
+                                <span style="font-size: 10px;">Did you know? You can enter 'OP_RETURN' to search for unspendable coins.</span>
+
+
                             }
                             else
                             {
                                 <small>The Blockexplorer node seems to be offline - Mainnet</small>
                             }
                         </p>
+                        <p>Get ready for the Obsidian relaunch on 4th December 2017<br /><img src="~/images/bombs_fireworks-256.png" /><br /> and the Obsidian Messenger release at xmas!</p>
                     </div>
                 </div>
             </div>

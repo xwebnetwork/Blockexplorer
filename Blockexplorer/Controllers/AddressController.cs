@@ -20,8 +20,8 @@ namespace Blockexplorer.Controllers
 	    [Route("address/{id}")]
 	    public async Task<ActionResult> Index(string id, string show, int page = 0)
 	    {
-			if(show == null)
-				return View("_NotFound");
+			//if(show == null)
+			//	return View("_NotFound");
 
 			try
 		    {

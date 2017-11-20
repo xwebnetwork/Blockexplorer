@@ -25,7 +25,7 @@ namespace Blockexplorer.Services
 					return null;
 
 				List<Transaction> transactions = new List<Transaction>();
-				string[] txids = addressEntity.TxIdBlob.Split("\r\n");
+				string[] txids = addressEntity.TxIdBlob.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
 				foreach (var txid in txids)
 				{
 					var transaction = new Transaction

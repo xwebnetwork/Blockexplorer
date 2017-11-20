@@ -1,19 +1,16 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="page-content">
         <div class="text-center notFound">
-            <a href="@Url.Action("Index", "Home")"><img src="/images/404.png" style="height: 240px; width: 240px"></a>
+            <a href="@Url.Action("Index", "Home")"><img src="/images/404.png" style="height: 100px; width: 100px"></a>
         </div>
         <div class="text-center">
-            This content is not available.<br>
+            We are sorry, we could not find this item.<br>
+            <a href="@Url.Action("Index", "Home")">Search again</a><br />
+            Caution: The address index is currently lagging, some existing addresses might not be found yet!
         </div>
-        <div class="goback">
-            <a href="@Url.Action("Index", "Home")" class="btn-2 ">Go back</a>
-        </div>
-
     </div>
-    <div class="footer-push"></div>
 </div>

@@ -38,7 +38,7 @@ body {margin-top: 0px;background: #F7F8F9; font-family: 'ProximaNova-Regular'; c
 .logo img{width: 100%;}
 .home-first {
     margin-top: -20px;
-    padding: 50px 0 100px;
+    padding: 20px 0 10px 0;
     text-align: center;
 }
 .page-content {
@@ -358,7 +358,7 @@ a {
 }
 .confirmation-label{}
     .confirmation-label span {
-        background: #28AFAC;
+        background: #035654;
         color: #fff;
         padding: 5px 10px;
         text-transform: uppercase;
@@ -445,8 +445,8 @@ a {
 }
 
 .navbar-inverse .navbar-toggle {
-    border-color: #171C8F;
-    background: #2D329A;
+    border-color: #777;
+    background: #555;
 }
 .notFound{
     width: 60%;
