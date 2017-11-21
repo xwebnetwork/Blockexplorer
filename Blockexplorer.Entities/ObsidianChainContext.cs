@@ -33,7 +33,7 @@ namespace Blockexplorer.Entities
 				}
 			}
 
-			optionsBuilder.UseSqlServer(_connectionString);
+			optionsBuilder.UseSqlServer(_connectionString, opt => opt.EnableRetryOnFailure());
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
