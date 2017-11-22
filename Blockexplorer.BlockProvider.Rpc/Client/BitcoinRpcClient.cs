@@ -37,7 +37,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 		{
 			try
 			{
-				HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(_settings.Url);
+				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(_settings.Url);
 				//HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(Url);
 				webRequest.Credentials = new NetworkCredential(_settings.User, _settings.Password);
 				string username = _settings.User;
@@ -89,10 +89,10 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.ToString());
+				// Console.WriteLine(e.ToString());
 				throw;
 			}
-			
+
 		}
 
 		public async Task<string> GetBestBlockHash()
@@ -115,7 +115,7 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 			}
 			catch { }
 			return null;
-			
+
 		}
 
 		public async Task<GetBlockRpcModel> GetBlockAsync(string hash)
@@ -130,9 +130,18 @@ namespace Blockexplorer.BlockProvider.Rpc.Client
 
 		public async Task<string> GetBlockHashAsync(int blockNumber)
 		{
-			var json = await InvokeMethod("getblockhash", blockNumber);
-			var result = JsonConvert.DeserializeObject<TransportRpcModel<string>>(json);
-			return result.Result;
+			try
+			{
+				var json = await InvokeMethod("getblockhash", blockNumber);
+				var result = JsonConvert.DeserializeObject<TransportRpcModel<string>>(json);
+				return result.Result;
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"getblockhash {blockNumber} returned 500.");
+				return null;
+			}
+
 		}
 
 		public async Task<int> GetBlockCountAsync()

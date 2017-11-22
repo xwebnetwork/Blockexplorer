@@ -60,7 +60,7 @@ namespace Blockexplorer.Indexer
 						if (blockHash == null)
 						{
 							Console.WriteLine($"Block at height {_currentBlockHeight} not found, waiting...");
-							await Task.Delay(1000);
+							await Task.Delay(30000);
 							if (!token.IsCancellationRequested)
 								goto getBlock;
 							return;
