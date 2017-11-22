@@ -20,6 +20,13 @@
                             <td class="no-wrap">Address</td>
                             <td class="expand-column">@Model.Address.Id</td>
                         </tr>
+                        @if (Model.Address.Id.Equals("OP_RETURN", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <tr>
+                                <td class="no-wrap">Info</td>
+                                <td class="expand-column">Burned coins - these coins are provably unspendable</td>
+                            </tr>}
+                       
                         <tr>
                             <td class="no-wrap">Total transactions</td>
                             <td class="expand-column">@Model.Address.TotalTransactions</td>
@@ -43,7 +50,12 @@
                                 <img src="~/images/favicon.png" style="width: 50px" />
                             </span>
                             <div class="details-left balance-left">
-                                <h4 class="list-group-item-heading">Obsidian</h4>
+                                @if (Model.Address.Id.Equals("OP_RETURN", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <h4 class="list-group-item-heading">Burned</h4>}
+                                else
+                                {  <h4 class="list-group-item-heading">Obsidian</h4>}
+                               
                                 <p class="list-group-item-text text-muted"></p>
                             </div>
                             <div class="details-right text-right">
@@ -52,7 +64,10 @@
                         </li>
 
                     </ul>
-                    <p style="text-align: center">Caution: The index is currently lagging, balance may be wrong!</p>
+                    @if (Model.Address.Id.Equals("OP_RETURN", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <p style="text-align: center">Provably unspendable coins.</p>}
+                   
                 </div>
 
             </div>

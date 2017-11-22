@@ -1,0 +1,105 @@
+﻿@using Blockexplorer.Core.Domain
+@using System.Collections.Generic;
+@model List<Address>
+@{
+    ViewData["Title"] = "Top 100 Adresses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal burned = Model.Single(x => x.Id == "OP_RETURN").Balance;
+}
+
+<div class="container">
+    <header class="top-nav-links clearfix">
+        <h1>TOP 100 Addresses</h1>
+    </header>
+
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-md-7">
+                <table class="table table-rounded ">
+                    <tbody>
+                        <tr>
+                            <td class="no-wrap">Richlist</td>
+                            <td class="expand-column">TOP 100 Addresses</td>
+                        </tr>
+                       
+                       
+                        <tr>
+                            <td class="no-wrap">Burned / Unspendable</td>
+                            <td class="expand-column">@burned.ToString("#,#") ODN</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="list-group-item clearfix section-header">
+                        <h3 class="panel-title">Sum of Balances</h3>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item clearfix">
+                            <span class="currency-icon thumbnail dspl-icon">
+                                <img src="~/images/favicon.png" style="width: 50px" />
+                            </span>
+                            <div class="details-left balance-left">
+                                <h4 class="list-group-item-heading">Top 100</h4>
+                               
+                                <p class="list-group-item-text text-muted"></p>
+                            </div>
+                            <div class="details-right text-right">
+                                <h4 class="list-group-item-heading">@((Model.Sum(x=>x.Balance)-burned).ToString("#,#")) ODN</h4>
+                            </div>
+                        </li>
+
+                    </ul>
+                   
+                </div>
+
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="transactions-header">Addresses by Balance</h3>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var address = Model[i];
+
+            <div class="panel panel-success transaction-details">
+                <div class="panel-heading row">
+                    <h3 class="panel-title address-transaction-header col-sm-7">
+                        <a href="@Url.Action("Index", "Address", new { id = address.Id })">@address.Id</a>
+                    </h3>
+                    <div class="col-sm-3 text-center tr-date"></div>
+                    <div class="confirmation-label col-sm-2 text-right">
+                        <span>@address.Balance.ToString("#,#")@((address.Balance-(int)address.Balance).ToString(".00000000"))</span>
+                    </div>
+                </div>
+
+                <ul class="list-group">
+
+                    <li class="list-group-item clearfix section-header">
+                        <h3 class="panel-title hd-bt"># @(i+1)</h3>
+                    </li>
+
+                    <li class="list-group-item clearfix intput-output-group-list-item">
+
+                        <div class="intput-output-group show-details">
+                            <div class="icon dspl-icon">
+                                <span class="currency-icon thumbnail">
+                                    <img src="~/images/favicon.png" style="width: 40px" />
+                                </span>
+                            </div>
+                            <div style="text-align: center"><span style="font-size: 30px;"><a onmouseover="this.style.textDecoration = 'none'; return false;" style="color: #035654" href="@Url.Action("Index", "Address", new { id = address.Id })">@address.Balance.ToString("#,#") ODN</a></span></div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
+
+    <div class="footer-push">
+        footer push
+    </div>
+
+</div>

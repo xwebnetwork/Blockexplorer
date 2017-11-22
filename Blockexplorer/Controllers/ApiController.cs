@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Blockexplorer.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Blockexplorer.Controllers
 {
@@ -42,6 +43,20 @@ namespace Blockexplorer.Controllers
 				if (address == null)
 					return StatusCode(StatusCodes.Status404NotFound);
 				return Json(new { id = id, balance = address.Balance, totalTransactions = address.TotalTransactions, lastModifiedBlockHeight = address.LastModifiedBlockHeight, txids = address.TxIds });
+			}
+			catch (Exception)
+			{
+				return StatusCode(StatusCodes.Status500InternalServerError);
+			}
+		}
+
+		public async Task<ActionResult> Richlist()
+		{
+			try
+			{
+				var toplist = await _addressService.GetTopList();
+				var compact = toplist.Select(x => new { Id = x.Id, Balance = x.Balance }).ToArray();
+				return Json(compact);
 			}
 			catch (Exception)
 			{

@@ -51,7 +51,7 @@ namespace Blockexplorer.Services
 					}
 				}
 				
-				if(id.Length == 34)
+				if(id.Length == 34 || id.Equals("OP_RETURN", StringComparison.OrdinalIgnoreCase))
 				{
 					var address = await _addressService.GetAddress(id);
 

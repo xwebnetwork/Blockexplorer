@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Blockexplorer.Core.Domain;
-using Blockexplorer.Core.Repositories;
+using System.Collections.Generic;
 
 namespace Blockexplorer.Core.Interfaces.Services
 {
     public interface IAddressService
     {
-        IBlockchainDataProvider BlockchainDataProvider { get; set; }
-        IBlockRepository BlockRepository { get; set; } 
-
         Task<Address> GetAddress(string id);
-    }
+		Task<List<Address>> GetTopList();
+
+	}
 }

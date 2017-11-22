@@ -4,6 +4,8 @@ using Blockexplorer.Core.Domain;
 using System.Threading.Tasks;
 using Blockexplorer.Entities;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blockexplorer.Services
 {
@@ -50,14 +52,21 @@ namespace Blockexplorer.Services
 			}
 		}
 
+		public async Task<List<Address>> GetTopList()
+		{
+			using (var db = new ObsidianChainContext())
+			{
+				List<Address> addresses = await  db.AddressEntities.OrderByDescending(adr => adr.Balance).Take(100)
+					.Select(adr => new { Id = adr.Id, Balance = adr.Balance })
+					.Select(res => new Address() { Id = res.Id, Balance = res.Balance })
+					.ToListAsync();
+				return addresses;
+			}
+		}
 		public async Task Save(Address entity)
 		{
 
 		}
-
-		public async Task UpdateAddress(Address address)
-		{
-
-		}
+		
 	}
 }

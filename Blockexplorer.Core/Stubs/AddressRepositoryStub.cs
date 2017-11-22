@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Blockexplorer.Core.Domain;
 using Blockexplorer.Core.Repositories;
 using Microsoft.Extensions.Logging;
@@ -19,14 +20,16 @@ namespace Blockexplorer.Core.Stubs
 			return null;
 		}
 
+		public async Task<List<Address>> GetTopList()
+		{
+			return new List<Address>();
+		}
+
 		public async Task Save(Address entity)
 		{
 			_log.LogWarning("Not implemented!");
 		}
 
-		public async Task UpdateAddress(Address address)
-		{
-			_log.LogWarning("Not implemented!");
-		}
+		
 	}
 }

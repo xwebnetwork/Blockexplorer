@@ -66,5 +66,20 @@ namespace Blockexplorer.Controllers
 			}
 		   
 	    }
+
+		[Route("address/top")]
+		public async Task<ActionResult> Top()
+		{
+			try
+			{
+				var top = await _addressService.GetTopList();
+				return View(top);
+			}
+			catch (Exception e)
+			{
+				return View("Error");
+			}
+
+		}
 	}
 }

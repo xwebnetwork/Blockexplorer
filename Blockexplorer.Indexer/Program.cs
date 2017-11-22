@@ -40,17 +40,6 @@ namespace Blockexplorer.Indexer
 
 		static async Task Run(CancellationToken token)
 		{
-			//using (var db = new ObsidianChainContext())
-			//{
-			//	if (db.BlockEntities.Any())
-			//	{
-			//		_currentBlockNumber = db.BlockEntities.Max(x => x.Id);
-			//		_currentBlockHeight = db.BlockEntities.Max(x => x.Id) - 1;
-			//		_currentBlockHeight++;
-			//		_currentBlockNumber++;
-			//	}
-			//}
-
 			while (!token.IsCancellationRequested)
 			{
 				try
