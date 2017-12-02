@@ -92,6 +92,7 @@ namespace Blockexplorer.Indexer
                                 stats.BestAdrIndexHeight = _currentBlockHeight;
                                 stats.ModifiedDate = DateTime.UtcNow;
 
+                                context.SaveChanges(); // this is still necessary, even when using Commit()
                                 dbtx.Commit();
                             }
                             catch (Exception ex)
@@ -134,7 +135,7 @@ namespace Blockexplorer.Indexer
                 db.TransactionEntities.Add(genesisBlockTransaction);
                 _currentBlockHeight++;
                 _currentBlockNumber++;
-                // db.SaveChanges(); - we do a commit dbtx instead!
+                db.SaveChanges();
                 return 0;
             }
 
