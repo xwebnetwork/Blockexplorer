@@ -9,12 +9,14 @@ namespace Blockexplorer.Controllers
     public class AddressController : Controller
     {
 	    readonly IAddressService _addressService;
+        readonly IBlockService _blockService;
 
-	    const int ItemsOnPage = 20;
+        const int ItemsOnPage = 20;
 
-	    public AddressController(IAddressService addressService)
+	    public AddressController(IAddressService addressService, IBlockService blockService)
 	    {
 		    _addressService = addressService;
+            _blockService = blockService;
 	    }
 
 	    [Route("address/{id}")]
@@ -73,6 +75,11 @@ namespace Blockexplorer.Controllers
 			try
 			{
 				var top = await _addressService.GetTopList();
+                var stats = await _addressService.GetStats();
+                var lastBlock = await _blockService.GetLastBlock();
+                ViewData["BestHeight"] = stats.Item1;
+                ViewData["BestHeightDate"] = stats.Item2;
+                ViewData["BestBlockHeight"] = lastBlock.Height;
 				return View(top);
 			}
 			catch (Exception e)

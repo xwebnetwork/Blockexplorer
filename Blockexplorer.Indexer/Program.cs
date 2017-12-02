@@ -87,6 +87,11 @@ namespace Blockexplorer.Indexer
                                 var result = IndexBlock(context, blockHash);
                                 if (result != 0)
                                     return;
+
+                                var stats =context.StatEntities.Find("1"); // insert this row manually
+                                stats.BestAdrIndexHeight = _currentBlockHeight;
+                                stats.ModifiedDate = DateTime.UtcNow;
+
                                 dbtx.Commit();
                             }
                             catch (Exception ex)
@@ -129,7 +134,7 @@ namespace Blockexplorer.Indexer
                 db.TransactionEntities.Add(genesisBlockTransaction);
                 _currentBlockHeight++;
                 _currentBlockNumber++;
-                db.SaveChanges();
+                // db.SaveChanges(); - we do a commit dbtx instead!
                 return 0;
             }
 

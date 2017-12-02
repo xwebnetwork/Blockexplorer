@@ -36,8 +36,12 @@ namespace Blockexplorer.Services
             return address;
         }
 
-		
-		public async Task<List<Address>> GetTopList()
+        public async Task<Tuple<int, DateTime>> GetStats()
+        {
+            return await _addressRepository.GetBestAddressIndexBlockHeight();
+        }
+
+        public async Task<List<Address>> GetTopList()
 		{
 			List<Address> addresses;
 

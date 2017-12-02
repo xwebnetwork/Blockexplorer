@@ -12,6 +12,7 @@ namespace Blockexplorer.Entities
     public class ObsidianChainContext : DbContext
     {
         static string _connectionString;
+        public DbSet<StatsEntity> StatEntities { get; set; }
         public DbSet<BlockEntity> BlockEntities { get; set; }
         public DbSet<TransactionEntity> TransactionEntities { get; set; }
         public DbSet<AddressEntity> AddressEntities { get; set; }
@@ -45,6 +46,12 @@ namespace Blockexplorer.Entities
             modelBuilder.Entity<BlockEntity>()
                 .HasIndex(p => new { p.BlockHash }).ForSqlServerIsClustered(false).IsUnique();
         }
+    }
+    public class StatsEntity
+    {
+        public string Id { get; set; }
+        public int BestAdrIndexHeight { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 
     public class BlockEntity

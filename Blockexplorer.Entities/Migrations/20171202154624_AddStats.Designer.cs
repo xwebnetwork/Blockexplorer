@@ -11,9 +11,10 @@ using System;
 namespace Blockexplorer.Entities.Migrations
 {
     [DbContext(typeof(ObsidianChainContext))]
-    partial class ObsidianChainContextModelSnapshot : ModelSnapshot
+    [Migration("20171202154624_AddStats")]
+    partial class AddStats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

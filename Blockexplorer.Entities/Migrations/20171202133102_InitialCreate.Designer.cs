@@ -11,7 +11,7 @@ using System;
 namespace Blockexplorer.Entities.Migrations
 {
     [DbContext(typeof(ObsidianChainContext))]
-    [Migration("20171118165453_InitialCreate")]
+    [Migration("20171202133102_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

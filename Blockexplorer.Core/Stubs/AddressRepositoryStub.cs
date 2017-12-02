@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blockexplorer.Core.Domain;
 using Blockexplorer.Core.Repositories;
@@ -14,7 +15,12 @@ namespace Blockexplorer.Core.Stubs
 			_log = loggerfactory.CreateLogger(GetType());
 		}
 
-		public async Task<Address> GetById(string id)
+        public async Task<Tuple<int, DateTime>> GetBestAddressIndexBlockHeight()
+        {
+            return new Tuple<int, DateTime>(0, DateTime.MinValue);
+        }
+
+        public async Task<Address> GetById(string id)
 		{
 			_log.LogWarning("Not implemented!");
 			return null;

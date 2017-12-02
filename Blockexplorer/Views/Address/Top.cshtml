@@ -28,6 +28,14 @@
                             <td class="no-wrap">Burned / Unspendable</td>
                             <td class="expand-column">@burned.ToString("#,#") ODN</td>
                         </tr>
+                        <tr>
+                            <td class="no-wrap">Adr. Index Best Height</td>
+                            <td class="expand-column">@ViewData["BestHeight"] / @ViewData["BestBlockHeight"]</td>
+                        </tr>
+                        <tr>
+                            <td class="no-wrap">Adr. Index Best Date</td>
+                            <td class="expand-column">@ViewData["BestHeightDate"]</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
