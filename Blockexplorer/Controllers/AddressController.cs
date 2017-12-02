@@ -78,7 +78,7 @@ namespace Blockexplorer.Controllers
                 var stats = await _addressService.GetStats();
                 var lastBlock = await _blockService.GetLastBlock();
                 ViewData["BestHeight"] = stats.Item1;
-                ViewData["BestHeightDate"] = stats.Item2;
+                ViewData["IndexerLastSeenAgo"] = (DateTime.UtcNow - stats.Item2).TotalMinutes.ToString("0.0");
                 ViewData["BestBlockHeight"] = lastBlock.Height;
 				return View(top);
 			}
