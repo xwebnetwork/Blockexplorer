@@ -13,7 +13,7 @@ using System.Transactions;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Data.Common;
-
+using System.Text;
 
 namespace Blockexplorer.Indexer
 {
@@ -50,16 +50,16 @@ namespace Blockexplorer.Indexer
 
             while (!token.IsCancellationRequested)
             {
-                if(shouldWait)
+                if (shouldWait)
                 {
                     Console.WriteLine("Going to sleep for 30 seconds...");
                     Thread.Sleep(30000);
                     shouldWait = false;
                 }
-               
+
                 try
                 {
-                  
+
                     using (var context = new ObsidianChainContext())
                     {
                         using (IDbContextTransaction dbtx = context.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
@@ -81,7 +81,7 @@ namespace Blockexplorer.Indexer
                                     Console.WriteLine($"Block at height {_currentBlockHeight} not found!");
                                     shouldWait = true;
                                     continue;
-                                   
+
                                 }
 
                                 var result = IndexBlock(context, blockHash);
@@ -200,7 +200,20 @@ namespace Blockexplorer.Indexer
             }
             existing.Balance += amount;
             existing.LastModifiedBlockHeight = (int)tx.Block.Height;
-            existing.TxIdBlob += tx.TransactionId + CRLF;
+            UpdateTxIdBlog(existing,tx.TransactionId);
+        }
+
+        static void UpdateTxIdBlog(AddressEntity existing, string txIdToAppend)
+        {
+            // the last txid is first in the blob
+            var oldTxIds = existing.TxIdBlob.Split(CRLF, StringSplitOptions.RemoveEmptyEntries).ToList();
+            // append at pos 0
+            oldTxIds.Insert(0, txIdToAppend);
+            var max250txids = oldTxIds.Take(250).ToArray();
+            var sb = new StringBuilder();
+            foreach (var txid in max250txids)
+                sb.Append(txid + CRLF);
+            existing.TxIdBlob = sb.ToString();
         }
 
         static void ProcessStakingReward(Core.Domain.Transaction tx, ObsidianChainContext db)
@@ -219,7 +232,7 @@ namespace Blockexplorer.Indexer
             Debug.Assert(existing != null);
             existing.Balance += change;
             existing.LastModifiedBlockHeight = (int)tx.Block.Height;
-            existing.TxIdBlob += tx.TransactionId + CRLF;
+            UpdateTxIdBlog(existing, tx.TransactionId);
         }
 
 
@@ -232,12 +245,16 @@ namespace Blockexplorer.Indexer
                 AddressEntity existing = db.AddressEntities.Find(vin.PrevVOutFetchedAddress);
 
                 if (existing == null) // work around broken index till indexing is re-run
+                {
+                    Console.WriteLine($"This should never happen: {vin.PrevVOutFetchedAddress} could not be found.");
                     continue;
+                }
+                   
 
                 inAdresses.Add(existing.Id);
                 existing.Balance -= vin.PrevVOutFetchedValue;
                 existing.LastModifiedBlockHeight = (int)tx.Block.Height;
-                existing.TxIdBlob += tx.TransactionId + CRLF;
+                UpdateTxIdBlog(existing, tx.TransactionId);
             }
             IList<Out> vouts = tx.TransactionsOut;
             foreach (var vout in vouts)
@@ -252,7 +269,7 @@ namespace Blockexplorer.Indexer
                     existing.Balance += vout.Value;
                     if (!inAdresses.Contains(existing.Id))
                     {
-                        existing.TxIdBlob += tx.TransactionId + CRLF;
+                        UpdateTxIdBlog(existing, tx.TransactionId);
                         existing.LastModifiedBlockHeight = (int)tx.Block.Height;
                     }
                 }
