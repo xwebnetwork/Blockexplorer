@@ -153,7 +153,7 @@ namespace Blockexplorer.Indexer
             foreach (var blockTx in blockTransactions)
             {
                 var transactionEntity = new TransactionEntity() { Id = blockTx.TransactionId, BlockEntity = blockEntity, TransactionData = blockTx.OriginalJson };
-                db.TransactionEntities.Add(transactionEntity);
+               // db.TransactionEntities.Add(transactionEntity);
             }
 
             // Process all blockTransactions for accounting
