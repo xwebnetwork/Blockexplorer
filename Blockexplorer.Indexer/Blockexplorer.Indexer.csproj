@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.0\connectionstring.secret">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blockexplorer.BlockProvider.Rpc\Blockexplorer.BlockProvider.Rpc.csproj" />
     <ProjectReference Include="..\Blockexplorer.Entities\Blockexplorer.Entities.csproj" />
   </ItemGroup>

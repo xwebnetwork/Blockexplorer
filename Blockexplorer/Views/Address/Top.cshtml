@@ -4,7 +4,11 @@
 @{
     ViewData["Title"] = "Top 100 Adresses";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    decimal burned = Model.Single(x => x.Id == "OP_RETURN").Balance;
+    decimal burned = 0m;
+    if (Model.SingleOrDefault(x => x.Id == "OP_RETURN") != null)
+    {
+        burned = Model.Single(x => x.Id == "OP_RETURN").Balance;
+    }
 }
 
 <div class="container">
