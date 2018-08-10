@@ -90,7 +90,7 @@
     <None Update="wildcard_obsidianplatform_com.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="wildcard_obsidianproject_org.pfx">
+    <None Update="404.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
