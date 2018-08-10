@@ -141,9 +141,10 @@ namespace Blockexplorer.Controllers
 				var info = await _apiService.GetInfo();
 				if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
 					return StatusCode(StatusCodes.Status500InternalServerError);
-				var circulatingSupply = info.MoneySupply - Burn - Locked;
+				//var circulatingSupply = info.MoneySupply - Burn - Locked;
+				var circulatingSupply = 25000000m;
 
-				return Json(new { moneySupply = Convert.ToInt32(circulatingSupply) });
+				return Json(new { circulatingSupply = Convert.ToInt32(circulatingSupply) });
 			}
 			catch (Exception)
 			{
@@ -159,7 +160,8 @@ namespace Blockexplorer.Controllers
 				var info = await _apiService.GetInfo();
 				if (info == null || !string.IsNullOrWhiteSpace(info.Errors))
 					return "-1";
-				var circulatingSupply = info.MoneySupply - Burn - Locked;
+				//var circulatingSupply = info.MoneySupply - Burn - Locked;
+				var circulatingSupply = 25000000m;
 				return Convert.ToInt32(circulatingSupply).ToString();
 			}
 			catch (Exception)
