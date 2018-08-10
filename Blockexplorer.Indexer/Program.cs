@@ -52,8 +52,8 @@ namespace Blockexplorer.Indexer
             {
                 if (shouldWait)
                 {
-                    Console.WriteLine("Going to sleep for 30 seconds...");
-                    Thread.Sleep(30000);
+                    Console.WriteLine("Going to sleep for 60 seconds...");
+                    Thread.Sleep(60000);
                     shouldWait = false;
                 }
 
