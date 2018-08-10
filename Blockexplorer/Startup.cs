@@ -43,6 +43,7 @@ namespace Blockexplorer
 			});
 
 			// Add framework services.
+			services.AddResponseCaching();
 			services.AddMvc();
 
 			// Add custom services.
