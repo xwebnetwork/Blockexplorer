@@ -70,7 +70,7 @@ namespace Blockexplorer.Controllers
 		}
 
 		[Route("address/top")]
-		[ResponseCache(Duration = 120, VaryByQueryKeys = new[] { "clear" })]
+		[ResponseCache(Duration = 120)]
 		public async Task<ActionResult> Top()
 		{
 			try
