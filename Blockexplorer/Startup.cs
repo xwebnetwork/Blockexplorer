@@ -67,6 +67,7 @@ namespace Blockexplorer
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
+			app.UseResponseCaching();
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
