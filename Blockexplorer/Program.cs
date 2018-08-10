@@ -15,7 +15,7 @@ namespace Blockexplorer
 				.UseKestrel(options =>
 				{
 					options.ApplicationSchedulingMode = SchedulingMode.Inline;
-					options.Listen(IPAddress.Any, 80);
+					// options.Listen(IPAddress.Any, 80);
 					options.Listen(IPAddress.Any, 443,
 				   listenOptions =>
 						{
