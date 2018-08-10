@@ -52,8 +52,8 @@ namespace Blockexplorer.Indexer
             {
                 if (shouldWait)
                 {
-                    Console.WriteLine("Going to sleep for 30 seconds...");
-                    Thread.Sleep(30000);
+                    Console.WriteLine("Going to sleep for 60 seconds...");
+                    Thread.Sleep(60000);
                     shouldWait = false;
                 }
 
@@ -69,20 +69,24 @@ namespace Blockexplorer.Indexer
                                 if (context.BlockEntities.Any())
                                 {
                                     _currentBlockNumber = context.BlockEntities.Max(x => x.Id);
-                                    _currentBlockHeight = context.BlockEntities.Max(x => x.Id) - 1;
+                                    _currentBlockHeight = _currentBlockNumber - 1;
                                     _currentBlockHeight++;
                                     _currentBlockNumber++;
                                 }
 
+								// now, currentBlockHeight is set to the next block we are looking for to index, however...
+								// ...we should ensure we are not indexing the tip.
+
+								var tipHash = _txAdapter.RpcClient.GetBestBlockHash().GetAwaiter().GetResult();
+								var tip = _txAdapter.RpcClient.GetBlockAsync(tipHash).GetAwaiter().GetResult();
+								if(_currentBlockHeight > tip.Height -3)
+								{
+									Console.WriteLine($"Block at height {_currentBlockHeight} is not yet mature enough....");
+									shouldWait = true;
+									continue;
+								}
+
                                 string blockHash = _txAdapter.RpcClient.GetBlockHashAsync(_currentBlockHeight).GetAwaiter().GetResult();
-
-                                if (blockHash == null)
-                                {
-                                    Console.WriteLine($"Block at height {_currentBlockHeight} not found!");
-                                    shouldWait = true;
-                                    continue;
-
-                                }
 
                                 var result = IndexBlock(context, blockHash);
                                 if (result != 0)

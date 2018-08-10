@@ -28,10 +28,10 @@ namespace Blockexplorer
 								if (File.Exists(passPath))
 								{
 									string pass = File.ReadAllText(passPath);
-									var certPath = Path.Combine(directory, "wildcard_obsidianplatform_com.pfx");
+									var certPath = Path.Combine(directory, "wildcard_obsidianproject_org.pfx");
 									if (File.Exists(certPath))
 									{
-										listenOptions.UseHttps("wildcard_obsidianplatform_com.pfx", pass.Trim());
+										listenOptions.UseHttps("wildcard_obsidianproject_org.pfx", pass.Trim());
 										listenOptions.UseConnectionLogging();
 									}
 									else
